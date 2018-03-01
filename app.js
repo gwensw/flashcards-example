@@ -66,7 +66,7 @@
       cardsToRetry = flashcards.getSessionInfo().incorrect;
       retryIndexes = flashcards.getSessionInfo().incorrectCards;
       Render.reset();
-      flashcards.openDeck('food');
+      flashcards.openDeck(name);
       drawNextCard();
     });
     
