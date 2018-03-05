@@ -263,7 +263,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -315,5 +315,27 @@ body {
   
   .header__title--main {
     font-size: 20px;
+  }
+  
+  .card {
+    margin-bottom: 40px;
+  }
+  
+  .answer {
+    flex-direction: column;
+  }
+  
+  .answer__input {
+    width: 100%;
+  }
+  
+  .answer__submit, .answer__next {
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .button--shuffle {
+    width: 90%;
+    margin-top: 20px;
   }
 }
