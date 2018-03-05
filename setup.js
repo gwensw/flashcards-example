@@ -33,7 +33,7 @@ if (!flashcards.deckLength()) {
     ['fast', 'cyflym'],
     ['generous', 'hael'],
     ['kind', 'caredig'],
-    ['successful', 'llwyddianus'],
+    ['successful', 'llwyddiannus'],
     ['interesting', 'diddorol'],
     ['honest', 'gonest'],
     ['lively', 'bywiog'],
