@@ -17,7 +17,9 @@
         questionTemplate = getTemplate("questionTemplate"),
         answerTemplate = getTemplate("answerTemplate"),
         progressTemplate = getTemplate("progressTemplate"),
-        scoreTemplate = getTemplate("scoreTemplate");
+        scoreTemplate = getTemplate("scoreTemplate"),
+        editCardTemplate = getTemplate("editCardTemplate"),
+        addCardTemplate = getTemplate("addCardTemplate");
   
   //variables for retrying wrong answers
   let cardsToRetry = 0,
@@ -73,8 +75,20 @@
   }
   
   function edit(name) {
-    console.log("Editing", name);
-    //TODO: interface for editing / creating new decks
+    flashcards.openDeck(name);
+    //bind event listeners to main
+    //and bind to header
+    //move below stuff to Render
+    changeHeader(true, name, true);
+    document.querySelector(".main").innerHTML = addCardTemplate();
+    const cards = flashcards.exposeDeck().cards;
+    for (let i = 0; i < flashcards.deckLength(); i++) {
+      let context = {
+        side1: cards[i].side1,
+        side2: cards[i].side2
+      };
+      document.getElementById("addCard").insertAdjacentHTML('beforebegin', editCardTemplate(context));
+    }
   }
   
   function select() {
@@ -115,10 +129,11 @@
     }
   }
   
-  function changeHeader (backlink, title) {
+  function changeHeader (backlink, title, editing) {
     let context = {
       backlink: backlink,
-      title: title
+      title: title,
+      editing: editing || false
     };
     document.querySelector(".header").innerHTML = headerTemplate(context);
   }

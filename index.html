@@ -6,9 +6,7 @@
 </head>
 <body>
   
-  <header class="header">
-    <a href="#">See All</a>
-  </header>
+  <header class="header"></header>
   
   <main class="main">
   
@@ -21,7 +19,12 @@
     {{#if backlink}}
       <a href="#" class="header__link">&larr;</a>
     {{/if}}
-    <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
+    {{#if editing}}
+      <input class="header__title header__title--edit" value="{{title}}">
+      <div class="button">Delete Deck</div>
+    {{else}}
+      <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
+    {{/if}}
   </script>
   
   <script id="selectTemplate" type="text/x-handlebars-template">
@@ -86,6 +89,46 @@
       <div class="progress__step progress__step--{{this}}"></div>
     {{/each}}
   </script>
+  
+  <script id="editCardTemplate" type="text/x-handlebars-template">
+    <div>
+      <div>
+        {{#each side1}}
+        <input type="text" placeholder="Side 1" value="{{this}}" data-index="side1-{{@index}}">
+        {{/each}}
+        <div>+</div>
+      </div>
+      <div>
+        {{#each side2}}
+        <input type="text" placeholder="Side 2" value="{{this}}" data-index="side2-{{@index}}">
+        {{/each}}
+        <div>+</div>
+      </div>
+      <div>
+        <select>
+          <option value=0>0</option>
+          <option value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5 selected>5</option>
+          <option value=6>6</option>
+          <option value=7>7</option>
+          <option value=8>8</option>
+          <option value=9>9</option>
+          <option value=10>10</option>
+        </select>
+      </div>
+      <div>X</div>
+    </div>
+  </script>
+  
+  <script id="addCardTemplate" type="text/x-handlebars-template">
+    <div id="addCard">
+      <p>Add a card!!!</p>
+    </div>
+  </script>
+  
   
   <!--- /Handlebars Templates --->
 
