@@ -93,16 +93,10 @@
   <script id="editCardTemplate" type="text/x-handlebars-template">
     <div>
       <div>
-        {{#each side1}}
-        <input type="text" placeholder="Side 1" value="{{this}}" data-index="side1-{{@index}}">
-        {{/each}}
-        <div>+</div>
+        <input type="text" placeholder="Side 1" value="{{side1}}">
       </div>
       <div>
-        {{#each side2}}
-        <input type="text" placeholder="Side 2" value="{{this}}" data-index="side2-{{@index}}">
-        {{/each}}
-        <div>+</div>
+        <input type="text" placeholder="Side 2" value="{{side2}}">
       </div>
       <div>
         <select>

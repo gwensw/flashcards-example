@@ -84,8 +84,9 @@
     const cards = flashcards.exposeDeck().cards;
     for (let i = 0; i < flashcards.deckLength(); i++) {
       let context = {
-        side1: cards[i].side1,
-        side2: cards[i].side2
+        side1: cards[i].side1.join(' / '),
+        side2: cards[i].side2.join(' / '),
+        difficulty: cards[i].difficulty
       };
       document.getElementById("addCard").insertAdjacentHTML('beforebegin', editCardTemplate(context));
     }
@@ -116,7 +117,7 @@
   
   function submitAnswer () {
     let userAnswer = document.querySelector('.answer__input'),
-        result = flashcards.checkAnswer(userAnswer.value);
+        result = flashcards.checkAnswer(userAnswer.value.trim());
     Render.answer(result.answers, result.newDifficulty, result.outcome);
     Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
     userAnswer.removeEventListener('keydown', enterAnswer);
