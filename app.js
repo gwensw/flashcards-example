@@ -105,8 +105,12 @@
   }
   
   function select() {
+    const sortedDeck = flashcards.listDecks().sort( (a, b) => {
+      return parseInt(a.name) - parseInt(b.name);
+    });
+    console.log(sortedDeck);
     let context = {
-      deck: flashcards.listDecks()
+      deck: sortedDeck
     };
     document.querySelector(".main").innerHTML = selectTemplate(context);
     changeHeader(false, "Flashcards.js demo");

@@ -1,7 +1,8 @@
 //create sample decks with some cards (if not already in localstorage)
   
-flashcards.openDeck('food');
+flashcards.openDeck('100');
 if (!flashcards.deckLength()) {
+  flashcards.setDisplayName('food');
   flashcards.addCards(
     ['milk', 'llaeth'],
     ['bread', 'bara'],
@@ -21,8 +22,9 @@ if (!flashcards.deckLength()) {
     ['coffee', 'coffi']);
 }
 
-flashcards.openDeck('adjectives');
+flashcards.openDeck('200');
 if (!flashcards.deckLength()) {
+  flashcards.setDisplayName('adjectives');
   flashcards.addCards(
     ['thin', 'tenau'],
     ['funny', 'doniol'],
