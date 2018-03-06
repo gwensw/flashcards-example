@@ -38,6 +38,7 @@
     '/train/:deckname': train,
     '/edit/:deckname': edit,
     '/': select,
+    '/editnew': editnew
   };
   
   /* FUNCTIONS FOR ROUTING */
@@ -76,7 +77,13 @@
       flashcards.openDeck(name);
       drawNextCard();
     });
-    
+  }
+  
+  function editnew() {
+    let newName = Math.floor(Date.now() / 1000).toString();
+    flashcards.openDeck(newName);
+    flashcards.setDisplayName('New Deck');
+    window.location.href = `#/edit/${newName}`;
   }
   
   function edit(name) {
