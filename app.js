@@ -43,13 +43,13 @@
   /* FUNCTIONS FOR ROUTING */
   
   function train(name) {
+    flashcards.openDeck(name);
     
     // make necessary rendering changes to homepage
     document.querySelector(".main").innerHTML = trainTemplate();
-    changeHeader(true, name);
+    changeHeader(true, flashcards.getDisplayName());
     
-    //open and render deck
-    flashcards.openDeck(name);
+    //render deck
     drawNextCard();
     
     //bind event listeners
@@ -84,7 +84,7 @@
     const cards = flashcards.exposeDeck().cards;
     //bind event listeners to main
     //and bind to header
-    changeHeader(true, name, true);
+    changeHeader(true, flashcards.getDisplayName(), true);
     //move below stuff to Render
     document.querySelector(".main").innerHTML = addCardTemplate();
     for (let i = 0; i < flashcards.deckLength(); i++) {
