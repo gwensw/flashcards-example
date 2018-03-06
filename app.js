@@ -27,8 +27,32 @@
   
   /* BIND GLOBAL EVENT LISTENERS */
   
-  document.querySelector(".header").addEventListener('change', (e) => {
+  document.querySelector('.header').addEventListener('change', (e) => {
     flashcards.setDisplayName(e.target.value);
+    e.stopPropagation();
+  });
+  
+  document.querySelector('.main').addEventListener('click', (e) => {
+    const el = e.target;
+    console.log(el);
+    if (el.id === 'addCard') {
+      flashcards.addCard('', '', 5);
+      let newIndex = flashcards.deckLength() - 1;
+      Render.newCard('', '', 5, newIndex);
+    }
+    else if (el.id === 'deleteCard') {
+      let cardToDelete = el.parentNode,
+          indexToDelete = el.parentNode.dataset.index,
+          cards;
+      flashcards.deleteCard();
+      document.querySelector('.main').removeChild(cardToDelete);
+      cards = document.querySelectorAll('.cardline');
+      [].forEach.call(cards, c => {
+        if (c.dataset.index > indexToDelete) {
+          c.dataset.index -= 1;
+        }
+      });
+    }
     e.stopPropagation();
   });
   
@@ -95,12 +119,11 @@
     //move below stuff to Render
     document.querySelector(".main").innerHTML = addCardTemplate();
     for (let i = 0; i < flashcards.deckLength(); i++) {
-      let context = {
-        side1: cards[i].side1.join(' / '),
-        side2: cards[i].side2.join(' / '),
-        difficulty: cards[i].difficulty
-      };
-      document.querySelector("#addCard").insertAdjacentHTML('afterend', editCardTemplate(context));
+      let side1 = cards[i].side1.join(' / '),
+          side2 = cards[i].side2.join(' / '),
+          difficulty = cards[i].difficulty,
+          index = i;
+      Render.newCard(side1, side2, difficulty, index);
     }
   }
   
@@ -236,6 +259,16 @@
       document.querySelector('.answer__input').classList.remove('js-hidden');
       document.getElementById('retry').classList.add('js-hidden');
       document.querySelector('.score').classList.add('js-hidden');
+    },
+    
+    newCard: function (side1, side2, difficulty, index) {
+      let context = {
+        index: index,
+        side1: side1,
+        side2: side2,
+        difficulty: difficulty
+      };
+      document.querySelector("#addCard").insertAdjacentHTML('afterend', editCardTemplate(context));
     }
     
   };

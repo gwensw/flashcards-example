@@ -94,7 +94,7 @@
   </script>
   
   <script id="editCardTemplate" type="text/x-handlebars-template">
-    <div>
+    <div data-index="{{index}}" class="cardline">
       <div>
         <input type="text" placeholder="Side 1" value="{{side1}}">
       </div>
@@ -116,14 +116,12 @@
           <option value=10>10</option>
         </select>
       </div>
-      <div>X</div>
+      <div id="deleteCard">X</div>
     </div>
   </script>
   
   <script id="addCardTemplate" type="text/x-handlebars-template">
-    <div id="addCard">
-      <p>Add a card!!!</p>
-    </div>
+    <div id="addCard">Add a card!!!</div>
   </script>
   
   
