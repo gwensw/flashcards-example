@@ -25,6 +25,13 @@
   let cardsToRetry = 0,
       retryIndexes = [];
   
+  /* BIND GLOBAL EVENT LISTENERS */
+  
+  document.querySelector(".header").addEventListener('change', (e) => {
+    flashcards.setDisplayName(e.target.value);
+    e.stopPropagation();
+  });
+  
   /* SET UP ROUTING */
   
   const routes = {
@@ -62,7 +69,6 @@
       drawNextCard();
     });
 
-    //start again with only wrong cards displayed
     document.getElementById('retry').addEventListener('click', () => {
       cardsToRetry = flashcards.getSessionInfo().incorrect;
       retryIndexes = flashcards.getSessionInfo().incorrectCards;
@@ -78,8 +84,8 @@
     const cards = flashcards.exposeDeck().cards;
     //bind event listeners to main
     //and bind to header
-    //move below stuff to Render
     changeHeader(true, name, true);
+    //move below stuff to Render
     document.querySelector(".main").innerHTML = addCardTemplate();
     for (let i = 0; i < flashcards.deckLength(); i++) {
       let context = {
