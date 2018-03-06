@@ -30,8 +30,8 @@
   <script id="selectTemplate" type="text/x-handlebars-template">
     <nav class="deckmenu">
       {{#each deck}}
-        <a href="#/train/{{this}}" class="deck">
-          <h2 class="deck__title">{{this}}</h2>
+        <a href="#/train/{{this.name}}" class="deck">
+          <h2 class="deck__title">{{this.displayName}}</h2>
         </a>
       {{/each}}
     </nav>

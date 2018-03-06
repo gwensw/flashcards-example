@@ -44,7 +44,6 @@
     //open and render deck
     flashcards.openDeck(name);
     drawNextCard();
-    console.log("Opened", name);
     
     //bind event listeners
     document.getElementById('shuffle').addEventListener('click', () => {
@@ -96,10 +95,8 @@
     let context = {
       deck: flashcards.listDecks()
     };
-    console.log(context.deck);
     document.querySelector(".main").innerHTML = selectTemplate(context);
     changeHeader(false, "Flashcards.js demo");
-    console.log('on select page');
   }
   
   /* HELPER FUNCTIONS FOR EVENT LISTENERS */
