@@ -288,6 +288,45 @@ body {
   color: #50514F;
 }
 
+::placeholder {
+  opacity: 0.5;
+}
+
+.cardline {
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.cardline--edit {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 4fr 4fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 1px #DADDDD;
+}
+
+.cardline--new {
+  border: 1px dashed grey;
+}
+
+.cardline__input {
+  height: 1.5em;
+  width: auto;
+  margin: 0;
+  padding: 0 0.2em;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300px;
+  color: #6A6B68;
+  line-height: normal;
+  background-color: transparent;
+  outline: none;
+}
+
 .js-hidden {
   display: none;
 }
