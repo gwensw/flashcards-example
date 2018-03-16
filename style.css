@@ -42,6 +42,10 @@ body {
   font-size: 24px;
 }
 
+.header__title--edit:focus {
+  color: #50514F;
+}
+
 .header__link {
   display: inline-block;
   position: absolute;
@@ -88,13 +92,30 @@ body {
   padding: 0 20px;
 }
 
+.deckmenu__container {
+  position: relative;
+  margin: 20px 10px;
+}
+
+.deckmenu__editlink {
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  color: #8DA7BE;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.deckmenu__editlink:hover {
+  color: #50514F;
+}
+
 .deck {
   display: flex;
   justify-content: center;
   flex-shrink: 0;
   width: 230px;
   height: 320px;
-  margin: 20px 10px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px #DADDDD;
   border: 2px solid #8DA7BE;
@@ -109,11 +130,15 @@ body {
 
 .deck__title {
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   color: #50514F;
   text-decoration: none;
   text-align: center;
   margin: auto 0;
+}
+
+.deck__title--plus {
+  color: #8DA7BE;
 }
 
 .card {
