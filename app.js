@@ -2,9 +2,6 @@
 
 (function () {
   
-  // TODO: Put deck length on each deck
-  // TODO: new feature for flashcards - it should be possible to give a deck a long-form name under settings
-  
   /* SETUP - SHARED VARIABLES */
   
   //get handlebars templates
@@ -29,6 +26,14 @@
   
   document.querySelector('.header').addEventListener('change', (e) => {
     flashcards.setDisplayName(e.target.value);
+    e.stopPropagation();
+  });
+  
+  document.querySelector('.header').addEventListener('click', (e) => {
+    if (e.target.id === 'deleteDeck') {
+      flashcards.deleteDeck(e.target.dataset.name);
+      window.location.href = '#';
+    }
     e.stopPropagation();
   });
   
@@ -114,7 +119,7 @@
     const cards = flashcards.exposeDeck().cards;
     //bind event listeners to main
     //and bind to header
-    changeHeader(true, flashcards.getDisplayName(), true);
+    changeHeader(true, flashcards.getDisplayName(), true, name);
     //move below stuff to Render
     document.querySelector(".main").innerHTML = addCardTemplate();
     for (let i = 0; i < flashcards.deckLength(); i++) {
