@@ -55,6 +55,11 @@ body {
   color: #FDFFFC;
 }
 
+.header__link--edit {
+  left: auto;
+  right: 10px;
+}
+
 .progress {
   width: 100%;
   height: 15px;

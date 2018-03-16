@@ -71,7 +71,7 @@
     
     // make necessary rendering changes to homepage
     document.querySelector(".main").innerHTML = trainTemplate();
-    changeHeader(true, flashcards.getDisplayName());
+    changeHeader(true, flashcards.getDisplayName(), false, name);
     
     //render deck
     drawNextCard();
@@ -166,11 +166,12 @@
     }
   }
   
-  function changeHeader (backlink, title, editing) {
+  function changeHeader (backlink, title, editing, name) {
     let context = {
       backlink: backlink,
       title: title,
-      editing: editing || false
+      editing: editing || false,
+      name: name || false
     };
     document.querySelector(".header").innerHTML = headerTemplate(context);
   }

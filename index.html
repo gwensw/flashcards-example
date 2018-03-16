@@ -26,6 +26,9 @@
     {{else}}
       <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
     {{/if}}
+    {{#if name}}
+      <a href="#/edit/{{this.name}}" class="fa fa-pencil-square-o fa-lg header__link header__link--edit"></a>
+    {{/if}}
   </script>
   
   <script id="selectTemplate" type="text/x-handlebars-template">
