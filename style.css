@@ -296,6 +296,11 @@ body {
   width: 90%;
   margin: 10px auto;
   padding: 10px;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  color: #6A6B68;
 }
 
 .cardline--edit {
@@ -308,7 +313,19 @@ body {
 }
 
 .cardline--new {
-  border: 1px dashed grey;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 25px;
+  border: 1px dashed #DADDDD;
+  margin: 30px auto;
+  cursor: pointer;
+  box-shadow: inset 0 0 2px #DADDDD;
+  color: #8DA7BE;
+}
+
+.cardline--new:hover {
+  box-shadow: inset 0 0 10px #DADDDD;
 }
 
 .cardline__input {
@@ -319,7 +336,6 @@ body {
   border: none;
   border-bottom: 1px solid #d1d1d1;
   font-size: 20px;
-  font-family: 'Roboto', sans-serif;
   font-weight: 300px;
   color: #6A6B68;
   line-height: normal;
@@ -328,7 +344,6 @@ body {
 }
 
 .cardline__select {
-  font-family: 'Roboto', sans-serif;
   background-color: transparent;
   width: 100%;
   height: 1.5em;
@@ -343,10 +358,9 @@ body {
 
 .cardline__delete {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif;
   color: #8DA7BE;
   text-align: center;
   cursor: pointer;

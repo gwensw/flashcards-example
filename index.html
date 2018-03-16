@@ -3,8 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+  <script src="https://use.fontawesome.com/2d89f1af84.js"></script>
 </head>
 <body>
   
@@ -119,14 +118,16 @@
           <option value=10>10</option>
         </select>
       </div>
-      <div class="cardline__delete" id="deleteCard">
-        <i class="fas fa-trash-alt"></i>
+      <div class="cardline__delete">
+        <i class="fa fa-trash-o cardline__delete fa-lg" id="deleteCard"></i>
       </div>
       </div>
   </script>
   
   <script id="addCardTemplate" type="text/x-handlebars-template">
-    <div id="addCard" class="cardline cardline--new">Add a card!!!</div>
+    <div id="addCard" class="cardline cardline--new">
+      New card<i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+    </div>
   </script>
   
   
