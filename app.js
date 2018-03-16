@@ -35,14 +35,14 @@
   document.querySelector('.main').addEventListener('click', (e) => {
     const el = e.target;
     console.log(el);
-    if (el.id === 'addCard') {
+    if (el.id === 'addCard' || el.parentNode.id === 'addCard') {
       flashcards.addCard('', '', 5);
       let newIndex = flashcards.deckLength() - 1;
       Render.newCard('', '', 5, newIndex);
     }
     else if (el.id === 'deleteCard') {
-      let cardToDelete = el.parentNode,
-          indexToDelete = el.parentNode.dataset.index,
+      let cardToDelete = el.parentNode.parentNode,
+          indexToDelete = cardToDelete.dataset.index,
           cards;
       flashcards.deleteCard();
       document.querySelector('.main').removeChild(cardToDelete);
@@ -53,7 +53,6 @@
         }
       });
     }
-    e.stopPropagation();
   });
   
   /* SET UP ROUTING */
