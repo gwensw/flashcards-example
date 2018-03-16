@@ -35,6 +35,13 @@ body {
   font-weight: 600;
 }
 
+.header__title--edit {
+  width: 50%;
+  text-transform: none;
+  color: #8DA7BE;
+  font-size: 24px;
+}
+
 .header__link {
   display: inline-block;
   position: absolute;
@@ -256,6 +263,15 @@ body {
   display: block;
   width: 250px;
   margin: 40px auto 0;
+}
+
+.button--delete {
+  position: absolute;
+  right: 10px;
+  height: auto;
+  padding: 8px 12px;
+  border: 1px solid #FDFFFC;
+  box-shadow: none;
 }
 
 .answer {
