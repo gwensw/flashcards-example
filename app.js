@@ -22,6 +22,11 @@
   let cardsToRetry = 0,
       retryIndexes = [];
   
+  Handlebars.registerHelper('diffselect', function (difficulty, options) {
+    let repl = `value=${difficulty}`;
+    return options.fn(this).replace(repl, `${repl} selected="selected"`);
+  });
+  
   /* BIND GLOBAL EVENT LISTENERS */
   
   document.querySelector('.header').addEventListener('change', (e) => {
@@ -49,7 +54,7 @@
       let cardToDelete = el.parentNode.parentNode,
           indexToDelete = cardToDelete.dataset.index,
           cards;
-      flashcards.deleteCard();
+      flashcards.deleteCard(indexToDelete);
       document.querySelector('.main').removeChild(cardToDelete);
       cards = document.querySelectorAll('.cardline');
       [].forEach.call(cards, c => {
