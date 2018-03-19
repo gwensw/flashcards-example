@@ -126,6 +126,7 @@ body {
   border: 2px solid #8DA7BE;
   background-color: #FDFFFC;
   text-decoration: none;
+  color: #50514F;
   transition: all 0.5s;
 }
 
@@ -136,14 +137,17 @@ body {
 .deck__title {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
-  color: #50514F;
   text-decoration: none;
   text-align: center;
   margin: auto 0;
 }
 
-.deck__title--plus {
+.deck--new {
   color: #8DA7BE;
+}
+
+.deck--new:hover {
+  color: #50514F;
 }
 
 .card {
@@ -297,10 +301,22 @@ body {
 
 .button--delete {
   position: absolute;
-  right: 10px;
+  right: 83px;
   height: auto;
   padding: 8px 12px;
   border: 1px solid #FDFFFC;
+  box-shadow: none;
+}
+
+.button--train {
+  position: absolute;
+  right: 10px;
+  height: auto;
+  width: auto;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid #FDFFFC;
+  text-decoration: none;
   box-shadow: none;
 }
 

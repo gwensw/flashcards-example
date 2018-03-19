@@ -23,6 +23,7 @@
     {{#if editing}}
       <input class="header__title header__title--edit" value="{{title}}">
       <div id="deleteDeck" class="button button--delete" data-name='{{name}}'>Delete Deck</div>
+      <a class="button button--train" href='#/train/{{name}}'>Train</a>
     {{else}}
       <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
       {{#if backlink}}
