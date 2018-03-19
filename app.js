@@ -44,7 +44,6 @@
   
   document.querySelector('.main').addEventListener('click', (e) => {
     const el = e.target;
-    console.log(el);
     if (el.id === 'addCard' || el.parentNode.id === 'addCard') {
       flashcards.addCard('', '', 5);
       let newIndex = flashcards.deckLength() - 1;
@@ -62,6 +61,18 @@
           c.dataset.index -= 1;
         }
       });
+    }
+  });
+  
+  document.querySelector('.main').addEventListener('change', (e) => {
+    const el = e.target,
+          parent = el.parentNode;
+    if (el.id === 'side1' || el.id === 'side2') {
+      let val = el.value.split('/').map( x => x.trim() );
+      flashcards.editCard(parent.dataset.index, el.id, val);
+    }
+    else if (el.id === 'diff') {
+      flashcards.editCard(parent.dataset.index, 'difficulty', parseInt(el.value));
     }
   });
   

@@ -105,30 +105,24 @@
   
   <script id="editCardTemplate" type="text/x-handlebars-template">
     <div data-index="{{index}}" class="cardline cardline--edit">
-      <div>
-        <input class="cardline__input" type="text" placeholder="Side 1" value="{{side1}}">
-      </div>
-      <div>
-        <input class="cardline__input"  type="text" placeholder="Side 2" value="{{side2}}">
-      </div>
-      <div>
-        <select class="cardline__select" type="number">
-          {{#diffselect difficulty}}
-          <option value='' disabled>Difficulty</option>
-          <option value=0>0</option>
-          <option value=1>1</option>
-          <option value=2>2</option>
-          <option value=3>3</option>
-          <option value=4>4</option>
-          <option value=5>5</option>
-          <option value=6>6</option>
-          <option value=7>7</option>
-          <option value=8>8</option>
-          <option value=9>9</option>
-          <option value=10>10</option>
-          {{/diffselect}}
-        </select>
-      </div>
+      <input id="side1" class="cardline__input" type="text" placeholder="Side 1" value="{{side1}}">
+      <input id="side2" class="cardline__input"  type="text" placeholder="Side 2" value="{{side2}}">
+      <select id="diff" class="cardline__select" type="number">
+        {{#diffselect difficulty}}
+        <option value='' disabled>Difficulty</option>
+        <option value=0>0</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+        <option value=6>6</option>
+        <option value=7>7</option>
+        <option value=8>8</option>
+        <option value=9>9</option>
+        <option value=10>10</option>
+        {{/diffselect}}
+      </select>
       <div class="cardline__delete">
         <i class="fa fa-trash-o cardline__delete fa-lg" id="deleteCard"></i>
       </div>
