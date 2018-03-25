@@ -39,6 +39,9 @@
       flashcards.deleteDeck(e.target.dataset.name);
       window.location.href = '#';
     }
+    if (e.target.id === 'flip') {
+      flashcards.flipDeck();
+    }
     e.stopPropagation();
   });
   
@@ -99,8 +102,6 @@
     
     //bind event listeners
     document.getElementById('shuffle').addEventListener('click', () => {
-      cardsToRetry = 0;
-      retryIndexes = [];
       Render.reset();
       flashcards.shuffle();
       drawNextCard();
@@ -115,9 +116,9 @@
     });
 
     document.getElementById('retry').addEventListener('click', () => {
+      Render.reset();
       cardsToRetry = flashcards.getSessionInfo().incorrect;
       retryIndexes = flashcards.getSessionInfo().incorrectCards;
-      Render.reset();
       flashcards.openDeck(name);
       drawNextCard();
     });
@@ -276,6 +277,8 @@
     },
     
     reset: function () {
+      cardsToRetry = 0;
+      retryIndexes = [];
       document.querySelector('.card').classList.remove('js-hidden');
       document.querySelector('.answer__input').classList.remove('js-hidden');
       document.getElementById('retry').classList.add('js-hidden');

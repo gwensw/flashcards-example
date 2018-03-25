@@ -27,7 +27,8 @@
     {{else}}
       <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
       {{#if backlink}}
-        <a href="#/edit/{{this.name}}" class="fa fa-pencil-square-o fa-lg header__link header__link--edit"></a>
+        <i id="flip" class="fa fa-exchange fa-lg header__link header__link--flip" aria-label="flip deck" title="flip deck"></i>
+        <a href="#/edit/{{this.name}}" class="fa fa-pencil-square-o fa-lg header__link header__link--edit"  title="edit deck"></a>
       {{/if}}
     {{/if}}
   </script>
