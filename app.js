@@ -41,6 +41,12 @@
     }
     if (e.target.id === 'flip') {
       flashcards.flipDeck();
+      // re-draw the current card
+      let currentIndex = flashcards.getSessionInfo().currentIndex,
+          card = flashcards.draw(currentIndex);
+      // render the new 'answer' side of the current card
+      // without changing the score / difficulty / progress in any way!
+      Render.question(card.question[0], card.difficulty, true);
     }
     e.stopPropagation();
   });
@@ -202,19 +208,28 @@
   
   const Render = {
     
-    question: function (qText, diff) {
+    question: function (qText, diff, isFlipped) {
       let context = {
         question: qText,
         difficulty: diff
       },
           userAnswer = document.querySelector('.answer__input');
       document.querySelector('.card__side--question').innerHTML = questionTemplate(context);
+      
+      //flip card
       document.querySelector('#maincard').classList.remove('card--flip');
-      userAnswer.value = '';
-      userAnswer.readOnly = false;
-      userAnswer.focus();
-      document.getElementById('checkAnswer').classList.remove('js-hidden');
-      document.getElementById('nextCard').classList.add('js-hidden');
+      
+      //as long as the reason for rendering isn't a deck flip...
+      if (!isFlipped) {
+        //clear user answer and focus on input
+        userAnswer.value = '';
+        userAnswer.readOnly = false;
+        userAnswer.focus();
+
+        //turn button to 'check' button
+        document.getElementById('checkAnswer').classList.remove('js-hidden');
+        document.getElementById('nextCard').classList.add('js-hidden');
+      }
     },
     
     answer: function (answers, newDiff, outcome) {
