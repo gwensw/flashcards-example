@@ -207,7 +207,7 @@
     flashcards.addCard('', '', 5);
     let newIndex = flashcards.deckLength() - 1;
     Render.newCard('', '', 5, newIndex);
-    //document.getElementById(`card-${newIndex}`).input;
+    document.getElementById(`card-${newIndex}`).children[0].focus();
   }
 
   /**************************/
