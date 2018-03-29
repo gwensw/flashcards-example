@@ -190,8 +190,9 @@
   
   function submitAnswer () {
     let userAnswer = document.querySelector('.answer__input'),
-        result = flashcards.checkAnswer(userAnswer.value.trim());
-    Render.answer(result.answers, result.newDifficulty, result.outcome);
+        result = flashcards.checkAnswer(userAnswer.value.trim()),
+        firstAnswer = result.answers[0]; //get 1st possible answer only. TODO: optionally show all possible answers, based on user settings
+    Render.answer([firstAnswer], result.newDifficulty, result.outcome);
     Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
     userAnswer.removeEventListener('keydown', enterAnswer);
   }
