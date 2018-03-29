@@ -67,7 +67,7 @@
     if (el.id === 'addCard' || el.parentNode.id === 'addCard') {
       makeNewCard();
     }
-    else if (el.id === 'deleteCard') {
+    else if (el.classList.contains('deleteCard')) {
       let cardToDelete = el.parentNode.parentNode,
           indexToDelete = cardToDelete.dataset.index,
           cards;
@@ -86,11 +86,12 @@
   document.querySelector('.main').addEventListener('change', (e) => {
     const el = e.target,
           parent = el.parentNode;
-    if (el.id === 'side1' || el.id === 'side2') {
+    if (el.classList.contains('side1') || el.classList.contains('side2')) {
+      let side = el.classList.contains('side1') ? 'side1' : 'side2';
       let val = el.value.split('/').map( x => x.trim() );
-      flashcards.editCard(parent.dataset.index, el.id, val);
+      flashcards.editCard(parent.dataset.index, side, val);
     }
-    else if (el.id === 'diff') {
+    else if (el.classList.contains('diff')) {
       flashcards.editCard(parent.dataset.index, 'difficulty', parseInt(el.value));
     }
   });
@@ -98,7 +99,7 @@
   // allow creation of new cards via enter key press in edit mode
   document.querySelector('.main').addEventListener('keydown', (e) => {
     const el = e.target;
-    if (event.keyCode === 13 && (el.id === 'side1' || el.id === 'side2')) {
+    if (event.keyCode === 13 && (el.classList.contains('side1') || el.classList.contains('side2'))) {
       event.preventDefault();
       makeNewCard();
     }
@@ -120,7 +121,6 @@
     const sortedDeck = flashcards.listDecks().sort( (a, b) => {
       return parseInt(a.name) - parseInt(b.name);
     });
-    console.log(sortedDeck);
     let context = {
       deck: sortedDeck
     };
@@ -207,6 +207,7 @@
     flashcards.addCard('', '', 5);
     let newIndex = flashcards.deckLength() - 1;
     Render.newCard('', '', 5, newIndex);
+    //document.getElementById(`card-${newIndex}`).input;
   }
 
   /**************************/
@@ -336,8 +337,6 @@
         difficulty: difficulty
       };
       document.querySelector("#addCard").insertAdjacentHTML('afterend', editCardTemplate(context));
-      //focus on the new card's first input field
-      document.getElementById(`card-${index}`).firstChild.focus();
     },
     
     //removes card from editing interface

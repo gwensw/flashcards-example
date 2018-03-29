@@ -106,9 +106,9 @@
   
   <script id="editCardTemplate" type="text/x-handlebars-template">
     <div id="card-{{index}}" data-index="{{index}}" class="cardline cardline--edit">
-      <input id="side1" class="cardline__input" type="text" placeholder="Side 1" value="{{side1}}">
-      <input id="side2" class="cardline__input"  type="text" placeholder="Side 2" value="{{side2}}">
-      <select id="diff" class="cardline__select" type="number">
+      <input class=" side1 cardline__input" type="text" placeholder="Side 1" value="{{side1}}">
+      <input class="side2 cardline__input"  type="text" placeholder="Side 2" value="{{side2}}">
+      <select class="diff cardline__select" type="number">
         {{#diffselect difficulty}}
         <option value='' disabled>Difficulty</option>
         <option value=0>0</option>
@@ -125,7 +125,7 @@
         {{/diffselect}}
       </select>
       <div class="cardline__delete">
-        <i class="fa fa-trash-o cardline__delete fa-lg" id="deleteCard"></i>
+        <i class="deleteCard fa fa-trash-o cardline__delete fa-lg"></i>
       </div>
       </div>
   </script>
