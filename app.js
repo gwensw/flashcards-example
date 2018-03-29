@@ -54,9 +54,7 @@
   document.querySelector('.main').addEventListener('click', (e) => {
     const el = e.target;
     if (el.id === 'addCard' || el.parentNode.id === 'addCard') {
-      flashcards.addCard('', '', 5);
-      let newIndex = flashcards.deckLength() - 1;
-      Render.newCard('', '', 5, newIndex);
+      makeNewCard();
     }
     else if (el.id === 'deleteCard') {
       let cardToDelete = el.parentNode.parentNode,
@@ -85,6 +83,14 @@
     }
   });
   
+  document.querySelector('.main').addEventListener('keydown', (e) => {
+    const el = e.target;
+    if (event.keyCode === 13 && (el.id === 'side1' || el.id === 'side2')) {
+      event.preventDefault();
+      makeNewCard();
+    }
+  });
+  
   /* SET UP ROUTING */
   
   const routes = {
@@ -98,29 +104,23 @@
   
   function train(name) {
     flashcards.openDeck(name);
-    
     // make necessary rendering changes to homepage
     document.querySelector(".main").innerHTML = trainTemplate();
     changeHeader(true, flashcards.getDisplayName(), false, name);
-    
     //render deck
     drawNextCard();
-    
     //bind event listeners
     document.getElementById('shuffle').addEventListener('click', () => {
       Render.reset();
       flashcards.shuffle();
       drawNextCard();
     });
-
     document.getElementById('checkAnswer').addEventListener('click', () => {
       submitAnswer();
     });
-
     document.getElementById('nextCard').addEventListener('click', () => {
       drawNextCard();
     });
-
     document.getElementById('retry').addEventListener('click', () => {
       Render.reset();
       cardsToRetry = flashcards.getSessionInfo().incorrect;
@@ -202,6 +202,12 @@
       name: name || false
     };
     document.querySelector(".header").innerHTML = headerTemplate(context);
+  }
+  
+  function makeNewCard () {
+    flashcards.addCard('', '', 5);
+    let newIndex = flashcards.deckLength() - 1;
+    Render.newCard('', '', 5, newIndex);
   }
 
   /* FUNCTIONS FOR RENDERING */
