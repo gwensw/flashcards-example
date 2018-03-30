@@ -13,12 +13,7 @@
   
   </main>
   
-  <div class="modal">
-    <div class="modal__content">
-        <span class="modal__button">&times;</span>
-        <h1>Hello, I am a modal!</h1>
-    </div>
-  </div>
+  <div class="modal"></div>
   
   
   <!--- Handlebars Templates --->
@@ -29,7 +24,6 @@
     {{/if}}
     {{#if editing}}
       <input class="header__title header__title--edit" value="{{title}}">
-      <div id="deleteDeck" class="button header__button header__button--delete" data-name='{{name}}'>Delete</div>
       <a class="button header__button header__button--train" href='#/train/{{name}}'>Train</a>
       <i id="deckSettings" class="fa fa-cog fa-lg header__link header__link--settings" data-name='{{name}}'></i>
     {{else}}
@@ -141,6 +135,21 @@
   <script id="addCardTemplate" type="text/x-handlebars-template">
     <div id="addCard" class="cardline cardline--new">
       New card<i class="fa fa-plus fa-lg" aria-hidden="true"></i>
+    </div>
+  </script>
+  
+  <script id="modalTemplate" type="text/x-handlebars-template">
+    <div class="modal__content">
+        <i class="modal__close fa fa-window-close fa-lg"></i>
+        <h1>Deck Settings</h1>
+        <label class="modal__switch">
+          <input class="modal__checkbox" type="checkbox">
+          <span class="modal__slider"></span>
+        </label>
+        <button id="deleteDeck" class="button modal__button" data-name='{{name}}'>
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+             Delete Deck
+      </button>
     </div>
   </script>
   

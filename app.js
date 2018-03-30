@@ -26,7 +26,8 @@
         progressTemplate = getTemplate("progressTemplate"),
         scoreTemplate = getTemplate("scoreTemplate"),
         editCardTemplate = getTemplate("editCardTemplate"),
-        addCardTemplate = getTemplate("addCardTemplate");
+        addCardTemplate = getTemplate("addCardTemplate"),
+        modalTemplate = getTemplate("modalTemplate");
 
   //replaces default difficulty # with what's stored in each card object
   Handlebars.registerHelper('diffselect', function (difficulty, options) {
@@ -46,11 +47,8 @@
   
   // handle button clicks in the header
   document.querySelector('.header').addEventListener('click', (e) => {
-    if (e.target.id === 'deleteDeck') {
-      flashcards.deleteDeck(e.target.dataset.name);
-      window.location.href = '#';
-    }
-    if (e.target.id === 'flip') {
+    const el = e.target;
+    if (el.id === 'flip') {
       flashcards.flipDeck();
       // re-draw the current card from the deck
       let currentIndex = flashcards.getSessionInfo().currentIndex,
@@ -58,7 +56,7 @@
       // render the new 'answer' side of the current card; don't change score/progress!
       Render.question(card.question[0], card.difficulty, true);
     }
-    if (e.target.id === 'deckSettings') {
+    if (el.id === 'deckSettings') {
       Render.modal();
     }
     e.stopPropagation();
@@ -111,8 +109,13 @@
   document.querySelector('.modal').addEventListener('click', (e) => {
     const el = e.target;
     //close the modal if the greyspace / close button is clicked
-    if (el.classList.contains('modal') || el.classList.contains('modal__button')) {
+    if (el.classList.contains('modal') || el.classList.contains('modal__close')) {
       Render.modal();
+    }
+    if (el.id === 'deleteDeck' || el.parentNode.id === 'deleteDeck') {
+      flashcards.deleteDeck(el.dataset.name || el.parentNode.dataset.name);
+      Render.modal();
+      window.location.href = '#';
     }
   });
   
@@ -160,7 +163,7 @@
     document.getElementById('nextCard').addEventListener('click', () => {
       drawNextCard();
     });
-    document.getElementById('retry').addEventListener('click', () => {
+    document.getElementById('retrmodal__y').addEventListener('click', () => {
       cardsToRetry = flashcards.getSessionInfo().incorrect;
       retryIndexes = flashcards.getSessionInfo().incorrectCards;
       Render.reset();
@@ -181,7 +184,7 @@
   function edit(name) {
     flashcards.openDeck(name);
     Render.header(true, flashcards.getDisplayName(), true, name);
-    Render.editing(flashcards.exposeDeck().cards, flashcards.deckLength());
+    Render.editing(flashcards.exposeDeck().cards, flashcards.deckLength(), name);
   }
   
   /****************************************/
@@ -328,8 +331,11 @@
       document.querySelector('.score').classList.add('js-hidden');
     },
     
-    //renders editing interface with any existing cards
-    editing: function (cards, decklength) {
+    //renders editing interface with settings and any existing cards
+    editing: function (cards, decklength, deckname) {
+      let mContext = {
+        name: deckname
+      };
       document.querySelector(".main").innerHTML = addCardTemplate();
       for (let i = 0; i < decklength; i++) {
         let side1 = cards[i].side1.join(' / '),
@@ -338,6 +344,7 @@
             index = i;
         Render.newCard(side1, side2, difficulty, index);
       }
+      document.querySelector(".modal").innerHTML = modalTemplate(mContext);
     },
     
     //renders a new blank card in the DOM, ready for editing
