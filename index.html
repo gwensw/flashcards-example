@@ -31,7 +31,7 @@
       <input class="header__title header__title--edit" value="{{title}}">
       <div id="deleteDeck" class="button header__button header__button--delete" data-name='{{name}}'>Delete</div>
       <a class="button header__button header__button--train" href='#/train/{{name}}'>Train</a>
-      <i id="deckSettings" class="fa fa-exchange fa-lg" data-name='{{name}}'></i>
+      <i id="deckSettings" class="fa fa-cog fa-lg header__link header__link--settings" data-name='{{name}}'></i>
     {{else}}
       <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
       {{#if backlink}}
