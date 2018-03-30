@@ -13,6 +13,13 @@
   
   </main>
   
+  <div class="modal">
+    <div class="modal__content">
+        <span class="modal__button">&times;</span>
+        <h1>Hello, I am a modal!</h1>
+    </div>
+  </div>
+  
   
   <!--- Handlebars Templates --->
   
@@ -24,6 +31,7 @@
       <input class="header__title header__title--edit" value="{{title}}">
       <div id="deleteDeck" class="button button--delete" data-name='{{name}}'>Delete Deck</div>
       <a class="button button--train" href='#/train/{{name}}'>Train</a>
+      <i id="deckSettings" class="fa fa-exchange fa-lg" data-name='{{name}}'></i>
     {{else}}
       <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
       {{#if backlink}}

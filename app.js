@@ -58,6 +58,9 @@
       // render the new 'answer' side of the current card; don't change score/progress!
       Render.question(card.question[0], card.difficulty, true);
     }
+    if (e.target.id === 'deckSettings') {
+      Render.modal();
+    }
     e.stopPropagation();
   });
   
@@ -102,6 +105,14 @@
     if (event.keyCode === 13 && (el.classList.contains('side1') || el.classList.contains('side2'))) {
       event.preventDefault();
       makeNewCard();
+    }
+  });
+  
+  document.querySelector('.modal').addEventListener('click', (e) => {
+    const el = e.target;
+    //close the modal if the greyspace / close button is clicked
+    if (el.classList.contains('modal') || el.classList.contains('modal__button')) {
+      Render.modal();
     }
   });
   
@@ -343,6 +354,11 @@
     //removes card from editing interface
     deleteCard: function (cardToDelete) {
       document.querySelector('.main').removeChild(cardToDelete);
+    },
+    
+    //show/hide the settings modal
+    modal: function () {
+      document.querySelector(".modal").classList.toggle("modal--show");
     }
     
   };
