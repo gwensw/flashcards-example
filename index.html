@@ -140,12 +140,28 @@
   
   <script id="modalTemplate" type="text/x-handlebars-template">
     <div class="modal__content">
-        <i class="modal__close fa fa-window-close fa-lg"></i>
-        <h1>Deck Settings</h1>
+      <i class="modal__close fa fa-window-close fa-lg"></i>
+      <p>
+        Show this side first:
+        <select class="modal__select" type="text">
+          <option value='side1' default>Side 1</option>
+          <option value='side2'>Side 2</option>
+        </select>
+      </p>
+      <p>
+        Only display first possible answer
         <label class="modal__switch">
           <input class="modal__checkbox" type="checkbox">
           <span class="modal__slider"></span>
         </label>
+      </p>
+      <p>
+        Automatically mark answers
+        <label class="modal__switch">
+          <input class="modal__checkbox" type="checkbox">
+          <span class="modal__slider"></span>
+        </label>
+      </p>
         <button id="deleteDeck" class="button modal__button" data-name='{{name}}'>
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
              Delete Deck
