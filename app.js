@@ -66,7 +66,12 @@
   document.querySelector('.header').addEventListener('click', (e) => {
     const el = e.target;
     if (el.id === 'flip') {
+      //flip deck and update settings
       flashcards.flipDeck();
+      let name = flashcards.exposeDeck().name,
+          s = getUserSettings(name);
+      s.qSide = flashcards.settings.questionSide;
+      updateUserSettings(name, s);
       // re-draw the current card from the deck
       let currentIndex = flashcards.getSessionInfo().currentIndex,
           card = flashcards.draw(currentIndex);
@@ -183,6 +188,9 @@
   // set up and initiate rendering of training interface
   function train(name) {
     flashcards.openDeck(name);
+    if (getUserSettings(name).qSide !== flashcards.settings.questionSide) {
+      flashcards.flipDeck();
+    }
     document.querySelector(".main").innerHTML = trainTemplate();
     Render.header(true, flashcards.getDisplayName(), false, name);
     //render deck
@@ -383,10 +391,9 @@
     
     //renders editing interface with settings and any existing cards
     editing: function (cards, decklength, deckname, usersettings) {
-      let isSide2 = (usersettings.qSide === 'side2');
       let mContext = {
         name: deckname,
-        isSide2: isSide2,
+        isSide2: usersettings.qSide === 'side2',
         firstanswer: usersettings.firstanswer,
         autocheck: usersettings.autocheck
       };
