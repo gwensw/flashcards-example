@@ -2,7 +2,7 @@
   
 flashcards.openDeck('100');
 if (!flashcards.deckLength()) {
-  flashcards.setDisplayName('food');
+  flashcards.setDisplayName('food in Welsh');
   flashcards.addCards(
     ['milk', 'llaeth'],
     ['bread', 'bara'],
@@ -22,22 +22,19 @@ if (!flashcards.deckLength()) {
     ['coffee', 'coffi']);
 }
 
-flashcards.openDeck('200');
+flashcards.openDeck('300');
 if (!flashcards.deckLength()) {
-  flashcards.setDisplayName('adjectives');
+  flashcards.setDisplayName('AWS acronyms'),
   flashcards.addCards(
-    ['thin', 'tenau'],
-    ['funny', 'doniol'],
-    ['tall', 'tal'],
-    ['angry', ['crac', 'dig']],
-    ['fat', 'tew'],
-    ['slow', 'araf'],
-    ['fast', 'cyflym'],
-    ['generous', 'hael'],
-    ['kind', 'caredig'],
-    ['successful', 'llwyddiannus'],
-    ['interesting', 'diddorol'],
-    ['honest', 'gonest'],
-    ['lively', 'bywiog'],
-    ['lonely', 'unig']);
+    ['IAM', ["Identity and Access Management", "Identity Access Management"]],
+    ['VPC', 'Virtual Private Cloud'],
+    ['CloudHSM', ["Cloud Hardware Security Module", "Hardware Security Module", "CloudHardware Security Module"]],
+    ['WAF', 'Web Application Firewall'],
+    ['EC2', 'Elastic Compute Cloud'],
+    ['SWF', 'Simple Workflow Service'],
+    ['EFS', 'Elastic File System'],
+    ['S3', 'Simple Storage Service'],
+    ['MQ', 'Message Queue'],
+    ['RTOS', ['Real Time Operating System', 'Real-time Operating System']],
+    ['EMR', ["Elastic MapReduce", "Elastic Map Reduce"]]); 
 }
