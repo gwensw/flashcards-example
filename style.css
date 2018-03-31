@@ -468,17 +468,17 @@ body {
 .modal__content {
   position: absolute;
   box-sizing: border-box;
-  top: 200px;
+  top: 260px;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 500px;
-  padding: 40px 20px 20px;
+  max-width: 400px;
+  padding: 60px 20px 20px;
   border-radius: 0.5rem;
   background-color: #FDFFFC;
   color: #6A6B68;
   font-family: 'Roboto', sans-serif;
-  font-size: 18px;
+    transition: all 1s;
 }
 
 .modal p {
@@ -487,7 +487,7 @@ body {
   align-items: center;
   justify-content: space-between;
   margin: 0 0 40px;
-  width: 320px;
+  font-size: 16px;
 }
 
 .modal__close {
@@ -504,9 +504,8 @@ body {
 }
 
 .modal__button {
-  width: 96%;
-  max-width: 200px;
-  margin: 0;
+  width: 80%;
+  margin: 30px 10% 0;
   border: 1px solid #8DA7BE;
   box-shadow: none;
   color: #8DA7BE;
@@ -521,10 +520,10 @@ body {
 .modal__switch {
   display: inline-block;
   position: relative;
-  align-self: flex-end;
+  flex-shrink: 0;
   width: 48px;
   height: 26px;
-  margin: 0 0 0 10px;
+  margin-left: 5px;
 }
 
 .modal__checkbox {
@@ -574,9 +573,8 @@ body {
 .modal__select {
   background-color: transparent;
   height: 1.5em;
-  margin: 0 0 0 10px;
   padding: 0.2em;
-  font-size: 20px;
+  font-size: 16px;
   color: #6A6B68;
   border: none;
   border-radius: 0px;
@@ -629,5 +627,12 @@ body {
   .button--shuffle {
     width: 90%;
     margin-top: 20px;
+  }
+  
+  .modal__content {
+    top: 200px;
+    width: 96%;
+    max-width: 400px;
+    padding: 40px 10px 20px;
   }
 }
