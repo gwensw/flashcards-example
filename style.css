@@ -60,6 +60,7 @@ body {
   width: 100%;
   background-color: #8DA7BE;
   box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+  font-size: 28px;
   font-family: 'Roboto', sans-serif;
   color: #FDFFFC;
 }
@@ -93,47 +94,23 @@ body {
 }
 
 .header__link {
-  display: inline-block;
   position: absolute;
-  left: 10px;
-  font-size: 40px;
+  margin: 0;
   text-decoration: none;
   color: #FDFFFC;
   cursor: pointer;
 }
 
-.header__link--edit {
-  left: auto;
-  right: 10px;
+.header__link--left1 {
+  left: 10px;
 }
 
-.header__link--flip {
-  left: auto;
+.header__link--right2 {
   right: 60px;
 }
 
-.header__link--settings {
-  left: auto;
+.header__link--right1 {
   right: 10px;
-}
-
-.header__button {
-  position: absolute;
-  width: auto;
-  min-width: 0;
-  height: auto;
-  padding: 8px 12px;
-  border: 1px solid #FDFFFC;
-  text-decoration: none;
-  box-shadow: none;
-}
-
-.header__button--delete {
-  right: 115px;
-}
-
-.header__button--train {
-  right: 40px;
 }
 
 .progress {
