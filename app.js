@@ -11,7 +11,7 @@
       retryIndexes = [];
   
   //default user settings for deck behaviour
-  const __defaultSettings = { qSide: 'side1', autocheck: 'true', allanswers: 'false'};  
+  const __defaultSettings = { qSide: 'side1', autocheck: true, firstanswer: true};  
   
   /*****************************/
   /* HANDLEBARS TEMPLATE SETUP */
@@ -123,17 +123,37 @@
     }
   });
   
+  // closing modal or deleting deck
   document.querySelector('.modal').addEventListener('click', (e) => {
-    const el = e.target;
-    //close the modal if the greyspace / close button is clicked
+    const el = e.target,
+          deck = document.querySelector('.modal__content').dataset.name;
     if (el.classList.contains('modal') || el.classList.contains('modal__close')) {
       Render.modal();
     }
     if (el.id === 'deleteDeck' || el.parentNode.id === 'deleteDeck') {
-      flashcards.deleteDeck(el.dataset.name || el.parentNode.dataset.name);
+      flashcards.deleteDeck(deck);
       //TODO: delete deck usersettings too?
       Render.modal();
       window.location.href = '#';
+    }
+  });
+  
+  // change settings in modal
+  document.querySelector('.modal').addEventListener('change', (e) => {
+    const el = e.target,
+          deck = document.querySelector('.modal__content').dataset.name,
+          s = getUserSettings(deck);
+    if (el.id === 'firstanswer') {
+      s.firstanswer = el.checked;
+      updateUserSettings(deck, s);
+    }
+    if (el.id === 'autocheck') {
+      s.autocheck = el.checked;
+      updateUserSettings(deck, s);
+    }
+    if (el.id === 'sideselect') {
+      s.qSide = el.value;
+      updateUserSettings(deck, s);
     }
   });
   
@@ -203,7 +223,7 @@
   function edit(name) {
     flashcards.openDeck(name);
     Render.header(true, flashcards.getDisplayName(), true, name);
-    Render.editing(flashcards.exposeDeck().cards, flashcards.deckLength(), name);
+    Render.editing(flashcards.exposeDeck().cards, flashcards.deckLength(), name, getUserSettings(name));
   }
   
   /****************************************/
@@ -222,10 +242,11 @@
   }
   
   function submitAnswer () {
-    let userAnswer = document.querySelector('.answer__input'),
+    const name = flashcards.exposeDeck().name,
+        userAnswer = document.querySelector('.answer__input'),
         result = flashcards.checkAnswer(userAnswer.value.trim()),
-        firstAnswer = result.answers[0]; //get 1st possible answer only. TODO: optionally show all possible answers, based on user settings
-    Render.answer([firstAnswer], result.newDifficulty, result.outcome);
+        answers = getUserSettings(name).firstanswer ? [result.answers[0]] : result.answers;
+    Render.answer(answers, result.newDifficulty, result.outcome);
     Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
     userAnswer.removeEventListener('keydown', enterAnswer);
   }
@@ -361,9 +382,13 @@
     },
     
     //renders editing interface with settings and any existing cards
-    editing: function (cards, decklength, deckname) {
+    editing: function (cards, decklength, deckname, usersettings) {
+      let isSide2 = (usersettings.qSide === 'side2');
       let mContext = {
-        name: deckname
+        name: deckname,
+        isSide2: isSide2,
+        firstanswer: usersettings.firstanswer,
+        autocheck: usersettings.autocheck
       };
       document.querySelector(".main").innerHTML = addCardTemplate();
       for (let i = 0; i < decklength; i++) {

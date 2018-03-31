@@ -139,26 +139,26 @@
   </script>
   
   <script id="modalTemplate" type="text/x-handlebars-template">
-    <div class="modal__content">
+    <div class="modal__content" data-name='{{name}}'>
       <i class="modal__close fa fa-window-close fa-lg"></i>
       <p>
         Show this side first:
-        <select class="modal__select" type="text">
-          <option value='side1' default>Side 1</option>
+        <select id="sideselect" class="modal__select" type="text">
+          <option value='side1' {{#if isSide2}}selected{{/if}}>Side 1</option>
           <option value='side2'>Side 2</option>
         </select>
       </p>
       <p>
         Only display first possible answer
         <label class="modal__switch">
-          <input class="modal__checkbox" type="checkbox">
+          <input id="firstanswer" class="modal__checkbox" type="checkbox" {{#if firstanswer}}checked{{/if}}>
           <span class="modal__slider"></span>
         </label>
       </p>
       <p>
         Automatically mark answers
         <label class="modal__switch">
-          <input class="modal__checkbox" type="checkbox">
+          <input id="autocheck" class="modal__checkbox" type="checkbox" {{#if firstanswer}}checked{{/if}}>
           <span class="modal__slider"></span>
         </label>
       </p>
