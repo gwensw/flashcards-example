@@ -10,6 +10,9 @@
   let cardsToRetry = 0,
       retryIndexes = [];
   
+  //default user settings for deck behaviour
+  const __defaultSettings = { qSide: 'side1', autocheck: 'true', allanswers: 'false'};  
+  
   /*****************************/
   /* HANDLEBARS TEMPLATE SETUP */
   /*****************************/
@@ -38,6 +41,20 @@
   /**********************************/
   /* BIND PERMANENT EVENT LISTENERS */
   /**********************************/
+  
+  //create empty user settings object in local storage, if none exists
+  //& make sure any existing decks have user settings (backwards compatibility check)
+  document.addEventListener('DOMContentLoaded', (e) => {
+    const decks = flashcards.listDecks();
+    let i = 0,
+        usersettings = JSON.parse(localStorage.getItem('usersettings')) || {};
+    for (i; i < decks.length; i++) {
+      if (!usersettings[decks[i].name]) {
+        usersettings[decks[i].name] = __defaultSettings;
+      }
+    }
+    localStorage.setItem('usersettings', JSON.stringify(usersettings));
+  });
   
   // handle changes to deck display name
   document.querySelector('.header').addEventListener('change', (e) => {
@@ -114,6 +131,7 @@
     }
     if (el.id === 'deleteDeck' || el.parentNode.id === 'deleteDeck') {
       flashcards.deleteDeck(el.dataset.name || el.parentNode.dataset.name);
+      //TODO: delete deck usersettings too?
       Render.modal();
       window.location.href = '#';
     }
@@ -163,7 +181,7 @@
     document.getElementById('nextCard').addEventListener('click', () => {
       drawNextCard();
     });
-    document.getElementById('retrmodal__y').addEventListener('click', () => {
+    document.getElementById('retry').addEventListener('click', () => {
       cardsToRetry = flashcards.getSessionInfo().incorrect;
       retryIndexes = flashcards.getSessionInfo().incorrectCards;
       Render.reset();
@@ -174,9 +192,10 @@
   
   // set up and initiate rendering of edit interface for new deck
   function editnew() {
-    let newName = Math.floor(Date.now() / 1000).toString();
+    const newName = Math.floor(Date.now() / 1000).toString();
     flashcards.openDeck(newName);
     flashcards.setDisplayName('New Deck');
+    updateUserSettings(newName, __defaultSettings);
     window.location.href = `#/edit/${newName}`;
   }
   
@@ -225,6 +244,16 @@
     document.getElementById(`card-${newIndex}`).children[0].focus();
   }
 
+  function updateUserSettings (name, deckSettings) {
+    let usersettings = JSON.parse(localStorage.getItem('usersettings'));
+    usersettings[name] = deckSettings;
+    localStorage.setItem('usersettings', JSON.stringify(usersettings));
+  }
+  
+  function getUserSettings (name) {
+    return JSON.parse(localStorage.getItem('usersettings'))[name];
+  }
+  
   /**************************/
   /* METHODS FOR RENDERING  */
   /**************************/
