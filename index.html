@@ -20,17 +20,17 @@
   
   <script id="headerTemplate" type="text/x-handlebars-template">
     {{#if backlink}}
-      <a href="#" class="header__link">&larr;</a>
+      <a href="#" class="header__link header__link--left1 fa fa-home"></a>
     {{/if}}
     {{#if editing}}
       <input class="header__title header__title--edit" value="{{title}}">
-      <a class="button header__button header__button--train" href='#/train/{{name}}'>Train</a>
-      <i id="deckSettings" class="fa fa-cog fa-lg header__link header__link--settings" data-name='{{name}}'></i>
+      <a class="header__link header__link--right1 fa fa-caret-square-o-right" href='#/train/{{name}}'></a>
+      <i id="deckSettings" class="header__link header__link--right2 fa fa-cog" data-name='{{name}}'></i>
     {{else}}
       <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
       {{#if backlink}}
-        <i id="flip" class="fa fa-exchange fa-lg header__link header__link--flip" aria-label="flip deck" title="flip deck"></i>
-        <a href="#/edit/{{this.name}}" class="fa fa-pencil-square-o fa-lg header__link header__link--edit"  title="edit deck"></a>
+        <i id="flip" class="fa fa-exchange header__link header__link--right2" aria-label="flip deck" title="flip deck"></i>
+        <a href="#/edit/{{this.name}}" class="fa fa-pencil-square-o header__link header__link--right1"  title="edit deck"></a>
       {{/if}}
     {{/if}}
   </script>
