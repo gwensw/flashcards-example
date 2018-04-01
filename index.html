@@ -67,13 +67,19 @@
     <div class="answer">
       <input type="text" class="answer__input">
       <button id="checkAnswer" class="button button--submit" type="button">Go ></button>
-      <div id="nextButtons" class="js-hidden">
+      <div id="nextButtons" class="answer__next js-hidden">
         {{#if autocheck}}
           <button id="nextCard" class="button button--next" type="button">Next</button>
         {{/if}}
         {{#unless autocheck}}
-          <button id="wrongAnswer" class="button button--selfcheck" type="button">I was wrong</button>
-          <button id="correctAnswer" class="button button--selfcheck" type="button">I was right</button>
+          <button id="wrongAnswer" class="button button--selfcheck" type="button">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            I was wrong
+          </button>
+          <button id="correctAnswer" class="button button--selfcheck" type="button">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            I was right
+          </button>
         {{/unless}}
       </div>
     </div>
@@ -172,10 +178,13 @@
           <span class="modal__slider"></span>
         </label>
       </p>
+      <p>
+        Permanently delete:
         <button id="deleteDeck" class="button modal__button" data-name='{{name}}'>
-          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-             Delete Deck
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Delete Deck
       </button>
+      </p>
     </div>
   </script>
   
