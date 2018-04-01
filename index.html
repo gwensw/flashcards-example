@@ -67,7 +67,15 @@
     <div class="answer">
       <input type="text" class="answer__input">
       <button id="checkAnswer" class="button button--submit" type="button">Go ></button>
-      <button id="nextCard" class="button button--next js-hidden" type="button">Next</button>
+      <div id="nextButtons" class="js-hidden">
+        {{#if autocheck}}
+          <button id="nextCard" class="button button--next" type="button">Next</button>
+        {{/if}}
+        {{#unless autocheck}}
+          <button id="wrongAnswer" class="button button--selfcheck" type="button">I was wrong</button>
+          <button id="correctAnswer" class="button button--selfcheck" type="button">I was right</button>
+        {{/unless}}
+      </div>
     </div>
     <button id="retry" class="button button--retry js-hidden">Retry Wrong Answers</button>
     <button id="shuffle" class="button button--shuffle">Shuffle and Start Again</button>
@@ -83,7 +91,7 @@
   </script>
   
   <script id="answerTemplate" type="text/x-handlebars-template">
-    <div class="card__difficulty  card__difficulty--{{difficulty}}">
+    <div class="card__difficulty card__difficulty--{{difficulty}}">
       <p>answer</p>
       <p>difficulty: {{difficulty}}</p>
     </div>
@@ -92,7 +100,9 @@
         {{this}}<br>
       {{/each}}
     </p>
-    <div class="card__success {{#if outcome}}card__success--correct{{else}}card__success--incorrect{{/if}}"></div>
+    {{#if autocheck}}
+      <div class="card__success {{#if outcome}}card__success--correct{{else}}card__success--incorrect{{/if}}"></div>
+    {{/if}}
   </script>
   
   <script id="scoreTemplate" type="text/x-handlebars-template">
@@ -158,7 +168,7 @@
       <p>
         Automatically mark answers
         <label class="modal__switch">
-          <input id="autocheck" class="modal__checkbox" type="checkbox" {{#if firstanswer}}checked{{/if}}>
+          <input id="autocheck" class="modal__checkbox" type="checkbox" {{#if autocheck}}checked{{/if}}>
           <span class="modal__slider"></span>
         </label>
       </p>

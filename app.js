@@ -187,11 +187,14 @@
   
   // set up and initiate rendering of training interface
   function train(name) {
+    let autocheck = getUserSettings(name).autocheck;
     flashcards.openDeck(name);
     if (getUserSettings(name).qSide !== flashcards.settings.questionSide) {
       flashcards.flipDeck();
     }
-    document.querySelector(".main").innerHTML = trainTemplate();
+    document.querySelector(".main").innerHTML = trainTemplate({
+      autocheck: autocheck
+    });
     Render.header(true, flashcards.getDisplayName(), false, name);
     //render deck
     drawNextCard();
@@ -206,9 +209,6 @@
     document.getElementById('checkAnswer').addEventListener('click', () => {
       submitAnswer();
     });
-    document.getElementById('nextCard').addEventListener('click', () => {
-      drawNextCard();
-    });
     document.getElementById('retry').addEventListener('click', () => {
       cardsToRetry = flashcards.getSessionInfo().incorrect;
       retryIndexes = flashcards.getSessionInfo().incorrectCards;
@@ -216,6 +216,22 @@
       flashcards.openDeck(name);
       drawNextCard();
     });
+    if (autocheck) {
+      document.getElementById('nextCard').addEventListener('click', () => {
+        drawNextCard();
+      });
+    } else {
+      //listen for choice of correct/incorrect button, then increment progress + draw next
+      document.getElementById('nextButtons').addEventListener('click', (e) => {
+        const el = e.target;
+        if (el.id === 'wrongAnswer' || el.id === 'correctAnswer') {
+          const submission = el.id === 'correctAnswer' ? flashcards.revealAnswer().answers[0] : '';
+          flashcards.checkAnswer(submission);
+          Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
+          drawNextCard();
+        }
+      });
+    }
   }
   
   // set up and initiate rendering of edit interface for new deck
@@ -251,11 +267,19 @@
   
   function submitAnswer () {
     const name = flashcards.exposeDeck().name,
-        userAnswer = document.querySelector('.answer__input'),
-        result = flashcards.checkAnswer(userAnswer.value.trim()),
-        answers = getUserSettings(name).firstanswer ? [result.answers[0]] : result.answers;
-    Render.answer(answers, result.newDifficulty, result.outcome);
-    Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
+          usersettings = getUserSettings(name),
+          userAnswer = document.querySelector('.answer__input');
+    if (usersettings.autocheck) {
+      const result = flashcards.checkAnswer(userAnswer.value.trim()),
+           answers = usersettings.firstanswer ? [result.answers[0]] : result.answers;
+      Render.answer(answers, result.newDifficulty, result.outcome);
+      Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
+    } else {
+      const a = flashcards.revealAnswer(),
+          answers = usersettings.firstanswer ? a.answers.slice(0, 1) : a.answers,
+          difficulty = a.difficulty;
+      Render.answer(answers, difficulty);
+    }
     userAnswer.removeEventListener('keydown', enterAnswer);
   }
       
@@ -318,27 +342,32 @@
         userAnswer.focus();
         //turn button to 'check' button
         document.getElementById('checkAnswer').classList.remove('js-hidden');
-        document.getElementById('nextCard').classList.add('js-hidden');
+        document.getElementById('nextButtons').classList.add('js-hidden');
       }
     },
     
-    //renders the answer side of a card + next button
-    answer: function (answers, newDiff, outcome) {
+    //renders the answer side of a card + reveals next button(s)
+    answer: function (answers, diff, outcome) {
+      const autocheck = arguments.length > 2;
       let context = {
         answers: answers,
-        difficulty: newDiff,
-        outcome: outcome
-      },
-          nextButton = document.getElementById('nextCard');
+        difficulty: diff,
+        outcome: outcome || undefined,
+        autocheck: autocheck
+      };
       document.querySelector('.card__side--answer').innerHTML = answerTemplate(context);  
       //animate card flip
       document.querySelector('#maincard').classList.add('card--flip');
-      //turn button to 'next' button
+      //turn button to 'next' button(s)
       document.getElementById('checkAnswer').classList.add('js-hidden');
-      nextButton.classList.remove('js-hidden');
-      //freeze/disable input and focus on 'next' button
+      document.getElementById('nextButtons').classList.remove('js-hidden');
+      //freeze/disable input and focus on 'next' or 'correct' button
       document.querySelector('.answer__input').readOnly = true;
-      nextButton.focus();
+      if (autocheck) {
+        document.getElementById('nextCard').focus();
+      } else {
+        document.getElementById('correctAnswer').focus();
+      }
     },
     
     //renders updated user progress bar
@@ -372,7 +401,7 @@
       scoreIndicator.classList.remove('js-hidden');
       document.querySelector('.card').classList.add('js-hidden');
       document.querySelector('.answer__input').classList.add('js-hidden');
-      document.getElementById('nextCard').classList.add('js-hidden');
+      document.getElementById('nextButtons').classList.add('js-hidden');
       if (sessionInfo.incorrect) {
         retryButton.classList.remove('js-hidden');
         retryButton.focus();
