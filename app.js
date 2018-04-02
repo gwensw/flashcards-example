@@ -2,6 +2,14 @@
 
 (function () {
   
+  //TODO:
+  // when 'train' is launched:
+    // check if 'state' exists for usersettings{deck}. If yes...
+    // flashcards.setSessionInfo() to match the saved session info
+    // change 'retryIndexes' to state.incorrect
+    // change cardsToRetry to state.incorrect.length
+    // render progress accordingly (or does this autocompute?)
+  
   /****************************/
   /* SETUP - SHARED VARIABLES */
   /****************************/
@@ -198,7 +206,8 @@
     Render.header(true, flashcards.getDisplayName(), false, name);
     //render deck
     drawNextCard();
-    //bind event listeners to training buttons
+    
+    //bind event listeners to training interface buttons
     document.getElementById('shuffle').addEventListener('click', () => {
       cardsToRetry = 0;
       retryIndexes = [];
@@ -227,7 +236,7 @@
         if (el.id === 'wrongAnswer' || el.id === 'correctAnswer') {
           const submission = el.id === 'correctAnswer' ? flashcards.revealAnswer().answers[0] : '';
           flashcards.checkAnswer(submission);
-          Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
+          recordProgress();
           drawNextCard();
         }
       });
@@ -261,8 +270,18 @@
     } else {
       Render.question(card.question[0], card.difficulty);
       document.querySelector('.answer__input').addEventListener('keydown', enterAnswer);
-      Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
+      recordProgress();
     }
+  }
+  
+  //autosaves progress and triggers progress bar render
+  function recordProgress () {
+    const si = flashcards.getSessionInfo(),
+        name = flashcards.exposeDeck().name;
+    let usersettings = getUserSettings(name);
+    usersettings.state = si;
+    updateUserSettings(name, usersettings);
+    Render.progress(si, flashcards.deckLength());
   }
   
   function submitAnswer () {
@@ -273,7 +292,7 @@
       const result = flashcards.checkAnswer(userAnswer.value.trim()),
            answers = usersettings.firstanswer ? [result.answers[0]] : result.answers;
       Render.answer(answers, result.newDifficulty, result.outcome);
-      Render.progress(flashcards.getSessionInfo(), flashcards.deckLength());
+      recordProgress();
     } else {
       const a = flashcards.revealAnswer(),
           answers = usersettings.firstanswer ? a.answers.slice(0, 1) : a.answers,
