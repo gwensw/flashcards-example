@@ -2,14 +2,6 @@
 
 (function () {
   
-  //TODO:
-  // when 'train' is launched:
-    // check if 'state' exists for usersettings{deck}. If yes...
-    // flashcards.setSessionInfo() to match the saved session info
-    // change 'retryIndexes' to state.incorrect
-    // change cardsToRetry to state.incorrect.length
-    // render progress accordingly (or does this autocompute?)
-  
   /****************************/
   /* SETUP - SHARED VARIABLES */
   /****************************/
@@ -195,16 +187,25 @@
   
   // set up and initiate rendering of training interface
   function train(name) {
-    let autocheck = getUserSettings(name).autocheck;
+    const usersettings = getUserSettings(name),
+          autocheck = getUserSettings(name).autocheck;
+    
+    //open deck and flip if user settings dictate
     flashcards.openDeck(name);
-    if (getUserSettings(name).qSide !== flashcards.settings.questionSide) {
+    if (usersettings.qSide !== flashcards.settings.questionSide) {
       flashcards.flipDeck();
     }
+    
+    //if a saved state exists for this deck, apply it
+    if (usersettings.state !== undefined) {
+      flashcards.setSessionInfo(usersettings.state);
+    }
+    
+    //render training interface and deck
     document.querySelector(".main").innerHTML = trainTemplate({
       autocheck: autocheck
     });
     Render.header(true, flashcards.getDisplayName(), false, name);
-    //render deck
     drawNextCard();
     
     //bind event listeners to training interface buttons
@@ -230,13 +231,11 @@
         drawNextCard();
       });
     } else {
-      //listen for choice of correct/incorrect button, then increment progress + draw next
       document.getElementById('nextButtons').addEventListener('click', (e) => {
         const el = e.target;
         if (el.id === 'wrongAnswer' || el.id === 'correctAnswer') {
           const submission = el.id === 'correctAnswer' ? flashcards.revealAnswer().answers[0] : '';
           flashcards.checkAnswer(submission);
-          recordProgress();
           drawNextCard();
         }
       });
@@ -264,13 +263,13 @@
   /****************************************/
   
   function drawNextCard () {
+    recordProgress();
     let card = cardsToRetry ? flashcards.draw(retryIndexes.splice(0, 1)[0]) : flashcards.drawNext();
     if (!card) {
       Render.score(flashcards.getSessionInfo());
     } else {
       Render.question(card.question[0], card.difficulty);
       document.querySelector('.answer__input').addEventListener('keydown', enterAnswer);
-      recordProgress();
     }
   }
   
@@ -282,6 +281,8 @@
     usersettings.state = si;
     updateUserSettings(name, usersettings);
     Render.progress(si, flashcards.deckLength());
+    console.log(si);
+    console.log(flashcards.deckLength());
   }
   
   function submitAnswer () {
