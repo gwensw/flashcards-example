@@ -40,14 +40,14 @@
       {{#each deck}}
         <div class="deckmenu__container">
           <a href='#/edit/{{this.name}}' class='deckmenu__editlink fa fa-pencil-square-o fa-lg'></a>
-          <a href="#/train/{{this.name}}" class="deck">
-            <h2 class="deck__title">{{this.displayName}}</h2>
+          <a href="#/train/{{this.name}}" class="deckmenu__deck">
+            <h2 class="deckmenu__title">{{this.displayName}}</h2>
           </a>
         </div>
       {{/each}}
       <div class="deckmenu__container">
-        <a href="#/editnew" class="deck deck--new">
-          <i class="deck__title deck__title--plus fa fa-plus fa-2x" aria-hidden="true"></i>
+        <a href="#/editnew" class="deckmenu__deck deckmenu__deck--new">
+          <i class="deckmenu__title fa fa-plus fa-2x" aria-hidden="true"></i>
         </a>
       </div>
     </nav>
@@ -157,28 +157,28 @@
   <script id="modalTemplate" type="text/x-handlebars-template">
     <div class="modal__content" data-name='{{name}}'>
       <i class="modal__close fa fa-window-close fa-lg"></i>
-      <p>
+      <p class="modal__row">
         Show this side first:
         <select id="sideselect" class="modal__select" type="text">
           <option value='side1'>Side 1</option>
           <option value='side2' {{#if isSide2}}selected{{/if}}>Side 2</option>
         </select>
       </p>
-      <p>
+      <p class="modal__row">
         Only display first possible answer
         <label class="modal__switch">
           <input id="firstanswer" class="modal__checkbox" type="checkbox" {{#if firstanswer}}checked{{/if}}>
           <span class="modal__slider"></span>
         </label>
       </p>
-      <p>
+      <p class="modal__row">
         Automatically mark answers
         <label class="modal__switch">
           <input id="autocheck" class="modal__checkbox" type="checkbox" {{#if autocheck}}checked{{/if}}>
           <span class="modal__slider"></span>
         </label>
       </p>
-      <p>
+      <p class="modal__row">
         Permanently delete:
         <button id="deleteDeck" class="button modal__button" data-name='{{name}}'>
         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
