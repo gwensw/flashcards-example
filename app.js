@@ -6,9 +6,8 @@
   /* SETUP - SHARED VARIABLES */
   /****************************/
   
-  //variables for enabling retrying of wrong answers at the end
-  let cardsToRetry = 0,
-      retryIndexes = [];
+  //keep track of incorrect cards to allow retrying of wrong answers at the end
+  let cardsToRetry = [];
   
   //default user settings for deck behaviour
   const __defaultSettings = { qSide: 'side1', autocheck: true, firstanswer: true};  
@@ -216,8 +215,7 @@
     
     //bind event listeners to training interface buttons
     document.getElementById('shuffle').addEventListener('click', () => {
-      cardsToRetry = 0;
-      retryIndexes = [];
+      cardsToRetry = [];
       Render.reset();
       flashcards.shuffle();
       drawNextCard();
@@ -226,8 +224,7 @@
       submitAnswer();
     });
     document.getElementById('retry').addEventListener('click', () => {
-      cardsToRetry = flashcards.getSessionInfo().incorrect;
-      retryIndexes = flashcards.getSessionInfo().incorrectCards;
+      cardsToRetry = flashcards.getSessionInfo().incorrectCards;
       Render.reset();
       flashcards.openDeck(name);
       drawNextCard();
@@ -270,7 +267,7 @@
   
   function drawNextCard () {
     recordProgress();
-    let card = cardsToRetry ? flashcards.draw(retryIndexes.splice(0, 1)[0]) : flashcards.drawNext();
+    let card = cardsToRetry.length ? flashcards.draw(cardsToRetry.splice(0, 1)[0]) : flashcards.drawNext();
     if (!card) {
       Render.score(flashcards.getSessionInfo());
     } else {
@@ -400,7 +397,7 @@
     progress: function (sessionInfo, totalCards) {
       let bars = [],
           cardsAnswered = sessionInfo.correct + sessionInfo.incorrect,
-          cardsRemaining = cardsToRetry ? cardsToRetry - cardsAnswered : totalCards - cardsAnswered,
+          cardsRemaining = cardsToRetry.length ? cardsToRetry.length - cardsAnswered : totalCards - cardsAnswered,
           i;
       for (i = 0; i < totalCards; i++) {
         if (sessionInfo.correctCards.includes(i)) {
