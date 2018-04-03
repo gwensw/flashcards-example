@@ -62,6 +62,12 @@
     e.stopPropagation();
   });
   
+  document.querySelector('.header').addEventListener('keydown', (e) => {
+    if (event.keyCode === 13) {
+      e.target.blur();
+    } 
+  });
+  
   // handle button clicks in the header
   document.querySelector('.header').addEventListener('click', (e) => {
     const el = e.target;
