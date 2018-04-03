@@ -178,20 +178,7 @@ body {
   margin: 20px 10px;
 }
 
-.deckmenu__editlink {
-  position: absolute;
-  top: 8px;
-  right: 5px;
-  color: #8DA7BE;
-  padding: 5px;
-  text-decoration: none;
-}
-
-.deckmenu__editlink:hover {
-  color: #50514F;
-}
-
-.deck {
+.deckmenu__deck {
   display: flex;
   justify-content: center;
   flex-shrink: 0;
@@ -206,27 +193,40 @@ body {
   transition: all 0.5s;
 }
 
-.deck:hover {
+.deckmenu__deck:hover {
   box-shadow: 2px 2px 20px 3px #DADDDD;
 }
 
-.deck__title {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  text-decoration: none;
-  text-align: center;
-  margin: auto 0;
-}
-
-.deck--new {
+.deckmenu__deck--new {
   border: 1px dashed #DADDDD;
   box-shadow: inset 0 0 2px #DADDDD;
   color: #8DA7BE;
 }
 
-.deck--new:hover {
+.deckmenu__deck--new:hover {
   box-shadow: inset 0 0 8px 1px #DADDDD;
   color: #50514F;
+}
+
+.deckmenu__editlink {
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  color: #8DA7BE;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.deckmenu__editlink:hover {
+  color: #50514F;
+}
+
+.deckmenu__title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+  text-align: center;
+  margin: auto 0;
 }
 
 .card {
@@ -488,7 +488,7 @@ body {
     transition: all 1s;
 }
 
-.modal p {
+.modal__row {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -533,10 +533,6 @@ body {
   margin-left: 5px;
 }
 
-.modal__checkbox {
-  display:none;
-}
-
 .modal__slider {
   position: absolute;
   cursor: pointer;
@@ -561,6 +557,10 @@ body {
   background-color: #FDFFFC;
   -webkit-transition: .4s;
   transition: .4s;
+}
+
+.modal__checkbox {
+  display:none;
 }
 
 .modal__checkbox:checked + .modal__slider {
@@ -594,25 +594,13 @@ body {
 }
 
 @media screen and (max-width: 830px) {
-  .deck {
+  .deckmenu__deck {
     width: 161px;
     height: 224px;
   }
 }
 
-@media screen and (max-width: 407px) {
-  .deck {
-    width: 207px;
-    height: 288px;
-  }
-  
-  .deckmenu {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0;
-  }
+@media screen and (max-width: 420px) {
   
   .header__title--main {
     font-size: 20px;
@@ -641,5 +629,31 @@ body {
     width: 96%;
     max-width: 400px;
     padding: 40px 10px 20px;
+  }
+  
+  .cardline {
+    box-sizing: border-box;
+    width: 100%;
+    grid-gap: 10px;
+  }
+  
+  .cardline__input, .cardline__select {
+    font-size: 16px;
+    padding: 0 0.1em;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .deckmenu {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0;
+  }
+  
+  .deckmenu__deck {
+    width: 207px;
+    height: 288px;
   }
 }
