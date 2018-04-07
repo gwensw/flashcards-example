@@ -615,8 +615,8 @@ body {
   }
   
   .card {
-    width: 96%;
-    height: 230px;
+    width: 95%;
+    height: 190px;
     margin-top: 10px;
     margin-bottom: 20px;
   }
@@ -624,7 +624,7 @@ body {
   .card__stack,
   .card__side {
     width: 100%;
-    height: 230px;
+    height: 190px;
   }
   
   .card__stack--1,
