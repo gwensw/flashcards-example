@@ -27,7 +27,7 @@
       <a class="header__link header__link--right1 fa fa-caret-square-o-right" href='#/train/{{name}}'></a>
       <i id="deckSettings" class="header__link header__link--right2 fa fa-cog" data-name='{{name}}'></i>
     {{else}}
-      <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{title}}</h1>
+      <h1 class="header__title{{#unless backlink}} header__title--main{{/unless}}">{{shorttitle}}</h1>
       {{#if backlink}}
         <i id="flip" class="fa fa-exchange header__link header__link--right2" aria-label="flip deck" title="flip deck"></i>
         <a href="#/edit/{{this.name}}" class="fa fa-pencil-square-o header__link header__link--right1"  title="edit deck"></a>
@@ -41,7 +41,7 @@
         <div class="deckmenu__container">
           <a href='#/edit/{{this.name}}' class='deckmenu__editlink fa fa-pencil-square-o fa-lg'></a>
           <a href="#/train/{{this.name}}" class="deckmenu__deck">
-            <h2 class="deckmenu__title">{{this.displayName}}</h2>
+            <h2 class="deckmenu__title">{{this.shortname}}</h2>
           </a>
         </div>
       {{/each}}

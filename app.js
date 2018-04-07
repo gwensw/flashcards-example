@@ -183,6 +183,9 @@
     const sortedDeck = flashcards.listDecks().sort( (a, b) => {
       return parseInt(a.name) - parseInt(b.name);
     });
+    for (let i = 0; i < sortedDeck.length; i++) {
+      sortedDeck[i].shortname = truncate(sortedDeck[i].displayName);
+    }
     let context = {
       deck: sortedDeck
     };
@@ -330,6 +333,23 @@
     return JSON.parse(localStorage.getItem('usersettings'))[name];
   }
   
+  function truncate (title) {
+    let mobilemax = 15, //max title length on narrow screens (750px)
+        allmax = 45, //max title length anywhere
+        mobilewordmax = 11, //max length of any individual word on mobile
+        allwordmax = 17, //max length of any individual word anywhere
+        len = title.length,
+        max = window.innerWidth > 350 ? allmax : mobilemax;
+
+    //if whole title longer than any max, truncate
+    if (len > max) {
+      let rgx = new RegExp(`.{${len - max}}$`);
+      title = title.replace(rgx, '...');
+    }
+    
+    return title;
+  }
+  
   /**************************/
   /* METHODS FOR RENDERING  */
   /**************************/
@@ -338,12 +358,14 @@
     
     // changes the header according to what area the user's in
     header: function (backlink, title, editing, name) {
-      let context = {
-        backlink: backlink,
-        title: title,
-        editing: editing || false,
-        name: name || false
-      };
+      let shorttitle = truncate(title),
+          context = {
+            backlink: backlink,
+            title: title,
+            shorttitle: shorttitle,
+            editing: editing || false,
+            name: name || false
+          };
       document.querySelector(".header").innerHTML = headerTemplate(context);
     },
     
