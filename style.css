@@ -606,8 +606,17 @@ body {
     height: 50px;
   }
   
+  .header__title {
+    margin-left: -20px;
+  }
+  
   .header__title--main {
     font-size: 20px;
+    margin-left: 0;
+  }
+  
+  .header__link--right2 {
+    right: 50px;
   }
   
   .progress {
@@ -670,7 +679,7 @@ body {
   
   .cardline__input, .cardline__select {
     font-size: 16px;
-    padding: 0 0.1em;
+    padding: 0;
   }
 }
 
