@@ -602,12 +602,27 @@ body {
 
 @media screen and (max-width: 420px) {
   
+  .header {
+    height: 50px;
+  }
+  
   .header__title--main {
     font-size: 20px;
   }
   
   .card {
+    margin-top: 10px;
     margin-bottom: 40px;
+  }
+  
+  .card__stack,
+  .card__side {
+    width: 300px;
+    height: 230px;
+  }
+  
+  .card__text {
+    font-size: 24px;
   }
   
   .answer__input {
