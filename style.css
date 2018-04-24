@@ -164,25 +164,32 @@ body {
 }
 
 .deckmenu {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 20px 20px;
+  margin-top: 50px;
   padding: 0 20px;
 }
 
 .deckmenu__container {
   position: relative;
-  margin: 20px 10px;
+	width: 100%;
+	max-width: 280px;
+}
+
+.deckmenu__padding {
+	margin-top: 150%;
 }
 
 .deckmenu__deck {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
   display: flex;
   justify-content: center;
   flex-shrink: 0;
-  width: 230px;
-  height: 320px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px #DADDDD;
   border: 2px solid #8DA7BE;
@@ -211,6 +218,7 @@ body {
   position: absolute;
   top: 8px;
   right: 5px;
+	z-index: 10;
   color: #8DA7BE;
   padding: 5px;
   text-decoration: none;
@@ -593,11 +601,22 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 830px) {
-  .deckmenu__deck {
-    width: 161px;
-    height: 224px;
-  }
+@media screen and (max-width: 1125px) {
+	.deckmenu {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.deckmenu {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.deckmenu {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 @media screen and (max-width: 420px) {
@@ -622,6 +641,12 @@ body {
   .progress {
     margin-bottom: 30px;
   }
+	
+	.deckmenu {
+		grid-gap: 5px 10px;
+		margin-top: 20px;
+  	padding: 0 5px;
+	}
   
   .card {
     width: 95%;
@@ -680,20 +705,5 @@ body {
   .cardline__input, .cardline__select {
     font-size: 16px;
     padding: 0;
-  }
-}
-
-@media screen and (max-width: 390px) {
-  .deckmenu {
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0;
-  }
-  
-  .deckmenu__deck {
-    width: 207px;
-    height: 288px;
   }
 }

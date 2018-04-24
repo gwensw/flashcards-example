@@ -39,6 +39,7 @@
     <nav class="deckmenu">
       {{#each deck}}
         <div class="deckmenu__container">
+					<div class="deckmenu__padding"></div>
           <a href='#/edit/{{this.name}}' class='deckmenu__editlink fa fa-pencil-square-o fa-lg'></a>
           <a href="#/train/{{this.name}}" class="deckmenu__deck">
             <h2 class="deckmenu__title">{{this.shortname}}</h2>
@@ -46,6 +47,7 @@
         </div>
       {{/each}}
       <div class="deckmenu__container">
+				<div class="deckmenu__padding"></div>
         <a href="#/editnew" class="deckmenu__deck deckmenu__deck--new">
           <i class="deckmenu__title fa fa-plus fa-2x" aria-hidden="true"></i>
         </a>
