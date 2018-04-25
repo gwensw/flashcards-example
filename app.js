@@ -446,6 +446,7 @@
       scoreIndicator.classList.remove('js-hidden');
       document.querySelector('.card').classList.add('js-hidden');
       document.querySelector('.answer__input').classList.add('js-hidden');
+			document.querySelector('.button--submit').classList.add('js-hidden');
       document.getElementById('nextButtons').classList.add('js-hidden');
       if (sessionInfo.incorrect) {
         retryButton.classList.remove('js-hidden');
