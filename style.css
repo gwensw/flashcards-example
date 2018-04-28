@@ -357,26 +357,23 @@ body {
   align-items: center;
   width: 100%;
   height: 2em;
+	border-bottom: 1px solid #97AFC3;
   padding: 0 0.75em;
   border-radius: 9px 9px 0 0;
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   font-weight: 300;
   font-style: italic;
   line-height: 0;
 }
 
-.card__difficulty--0 { background-color: #CBD7E1; }
-.card__difficulty--1 { background-color: #C0CFDB; }
-.card__difficulty--2 { background-color: #B6C7D5; }
-.card__difficulty--3 { background-color: #ACBFCF; }
-.card__difficulty--4 { background-color: #A1B7C9; }
-.card__difficulty--5 { background-color: #97AFC3; }
-.card__difficulty--6 { background-color: #8DA7BE; }
-.card__difficulty--7 { background-color: #8198AD; }
-.card__difficulty--8 { background-color: #74899C; }
-.card__difficulty--9 { background-color: #677A8B; }
-.card__difficulty--10 { background-color: #5A6B79; }
+.card__difficulty--correct {
+	/*TODO: new color for correct/incorrect (#unless autocheck) */
+}
+
+.card__difficulty--incorrect {
+	
+}
 
 .card__text {
   align-self: center;

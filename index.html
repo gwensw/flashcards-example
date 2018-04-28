@@ -92,8 +92,11 @@
   
   <script id="questionTemplate" type="text/x-handlebars-template">
     <div class="card__difficulty card__difficulty--{{difficulty}}">
-      <p>question</p>
-      <p>difficulty: {{difficulty}}</p>
+      <p>Q</p>
+      <p>
+				{{#difficon difficulty}}
+				{{/difficon}}
+			</p>
     </div>
     <p class="card__text">{{question}}</p>
     <div class="card__success card__success--hidden"></div>
@@ -101,8 +104,8 @@
   
   <script id="answerTemplate" type="text/x-handlebars-template">
     <div class="card__difficulty card__difficulty--{{difficulty}}">
-      <p>answer</p>
-      <p>difficulty: {{difficulty}}</p>
+      <p>A</p>
+      <p>{{#difficon difficulty}}{{/difficon}}</p>
     </div>
     <p class="card__text">
       {{#each answers}}

@@ -32,10 +32,31 @@
         modalTemplate = getTemplate("modalTemplate");
 
   //replaces default difficulty # with what's stored in each card object
-  Handlebars.registerHelper('diffselect', function (difficulty, options) {
+  Handlebars.registerHelper('diffselect', (difficulty, options) => {
     let repl = `value=${difficulty}`;
     return options.fn(this).replace(repl, `${repl} selected="selected"`);
   });
+	
+	//returns star icons corresponding to difficulty
+	Handlebars.registerHelper('difficon', (difficulty, options) => {
+		const fullStar = '<i class="fa fa-star" aria-hidden="true"></i>',
+					halfStar = '<i class="fa fa-star-half-o" aria-hidden="true"></i>',
+					emptyStar = '<i class="fa fa-star-o" aria-hidden="true"></i>',
+					diff = 10 - parseInt(difficulty);
+		let i = 0,
+				stars = [];
+		console.log(difficulty);
+		for (i; i < 5; i++) {
+			if (diff >= i * 2 + 2) {
+				stars.push(fullStar);
+			} else if (diff >= i * 2 + 1) {
+				stars.push(halfStar);
+			} else {
+				stars.push(emptyStar);
+			}
+		}
+		return new Handlebars.SafeString(stars.join(''));
+	});
   
   /**********************************/
   /* BIND PERMANENT EVENT LISTENERS */
@@ -287,8 +308,6 @@
     usersettings.state = si;
     updateUserSettings(name, usersettings);
     Render.progress(si, flashcards.deckLength());
-    console.log(si);
-    console.log(flashcards.deckLength());
   }
   
   function submitAnswer () {
