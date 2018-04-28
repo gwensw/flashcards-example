@@ -103,7 +103,7 @@
   </script>
   
   <script id="answerTemplate" type="text/x-handlebars-template">
-    <div class="card__difficulty card__difficulty--{{difficulty}}">
+    <div class="card__difficulty {{#if autocheck}}card__difficulty--{{outcome}}{{/if}}">
       <p>A</p>
       <p>{{#difficon difficulty}}{{/difficon}}</p>
     </div>
@@ -124,7 +124,9 @@
   
   <script id="progressTemplate" type="text/x-handlebars-template">
     {{#each bars}}
-      <div class="progress__step progress__step--{{this}}"></div>
+      <div class="progress__step progress__step--{{this}}">
+				{{#progressicon this}}{{/progressicon}}
+			</div>
     {{/each}}
   </script>
   

@@ -157,14 +157,19 @@ body {
 
 .progress__step {
   flex-grow: 1;
+	font-size: 13px;
+	text-align: center;
+	color: #fff;
 }
 
 .progress__step--correct {
   background-color: #70C1B3;
+	color: #C9E8E2;
 }
 
 .progress__step--incorrect {
   background-color: #F25F5C;
+	color: #FAC3C2;
 }
 
 .progress__step--incomplete {
@@ -368,11 +373,15 @@ body {
 }
 
 .card__difficulty--correct {
-	/*TODO: new color for correct/incorrect (#unless autocheck) */
+	border-bottom: 1px solid #70C1B3;
 }
 
 .card__difficulty--incorrect {
-	
+	border-bottom: 1px solid #F25F5C;
+}
+
+.card__difficulty i {
+	color: #F6993F
 }
 
 .card__text {

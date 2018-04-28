@@ -57,6 +57,16 @@
 		}
 		return new Handlebars.SafeString(stars.join(''));
 	});
+	
+	//returns progress icons for true/false/incomplete
+	Handlebars.registerHelper('progressicon', (status, options) => {
+		const icons = {
+			correct: 'fa fa-check',
+			incorrect: 'fa fa-times',
+			incomplete: 'fa fa-minus'
+		};
+		return new Handlebars.SafeString(`<i class="${icons[status]}" aria-hidden="true"></i>`);
+	});
   
   /**********************************/
   /* BIND PERMANENT EVENT LISTENERS */
@@ -412,11 +422,12 @@
     
     //renders the answer side of a card + reveals next button(s)
     answer: function (answers, diff, outcome) {
+			outcome = outcome ? 'correct' : 'incorrect';
       const autocheck = arguments.length > 2;
       let context = {
         answers: answers,
         difficulty: diff,
-        outcome: outcome || undefined,
+        outcome: outcome,
         autocheck: autocheck
       };
       document.querySelector('.card__side--answer').innerHTML = answerTemplate(context);  
