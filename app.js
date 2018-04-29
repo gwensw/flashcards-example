@@ -281,8 +281,8 @@
 		//make fullscreen if on mobile (header click exists fullscreen)
 		if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
 			if (screenfull.enabled) {
-				alert('screenfull');
 				screenfull.request();
+				alert(screenfull.isFullscreen);
 				document.getElementById('header').addEventListener('click', () => {
 					screenfull.exit();
 				});
