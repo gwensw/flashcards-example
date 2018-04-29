@@ -234,6 +234,8 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+	flex-direction: column;
+	-ms-flex-direction: column;
   justify-content: center;
   flex-shrink: 0;
   border-radius: 10px;
@@ -279,7 +281,20 @@ body {
   font-weight: 300;
   text-decoration: none;
   text-align: center;
-  margin: auto 0;
+  margin: 0;
+}
+
+.deckmenu__difficulty {
+	margin: 15px 0 0;
+	color: #F6993F;
+	text-align: center;
+}
+
+.deckmenu__length {
+	margin: 10px 0 0;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+	text-align: center;
 }
 
 .card {
@@ -381,7 +396,7 @@ body {
 }
 
 .card__difficulty i {
-	color: #F6993F
+	color: #F6993F;
 }
 
 .card__text {
