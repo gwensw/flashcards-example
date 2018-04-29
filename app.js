@@ -45,7 +45,6 @@
 					diff = 10 - parseInt(difficulty);
 		let i = 0,
 				stars = [];
-		console.log(difficulty);
 		for (i; i < 5; i++) {
 			if (diff >= i * 2 + 2) {
 				stars.push(fullStar);
@@ -280,13 +279,21 @@
 		
 		//make fullscreen if on mobile (header click exists fullscreen)
 		if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
-			if (screenfull.enabled) {
-				screenfull.request();
-				alert(screenfull.isFullscreen);
-				document.getElementById('header').addEventListener('click', () => {
-					screenfull.exit();
-				});
-			}
+			const doc = window.document,
+						docEl = doc.documentElement,
+						requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+			
+			if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    		requestFullScreen.call(docEl);
+  		}
+			
+//			if (screenfull.enabled) {
+//				screenfull.request();
+//				alert(screenfull.isFullscreen);
+//				document.getElementById('header').addEventListener('click', () => {
+//					screenfull.exit();
+//				});
+//			}
 		}
   }
   
