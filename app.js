@@ -244,7 +244,6 @@
       autocheck: autocheck
     });
     Render.header(true, flashcards.getDisplayName(), false, name);
-    drawNextCard();
     
     //bind event listeners to training interface buttons
     document.getElementById('shuffle').addEventListener('click', () => {
@@ -276,25 +275,27 @@
         }
       });
     }
+		document.getElementById('inputAnswer').addEventListener('focus', (e) => {
+			//TODO - make fullscreen if on mobile (header click exists fullscreen)
+			if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
+				const doc = window.document,
+							docEl = doc.documentElement,
+							requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+
+				if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+					requestFullScreen.call(docEl);
+				}
+	//			if (screenfull.enabled) {
+	//				screenfull.request();
+	//				alert(screenfull.isFullscreen);
+	//				document.getElementById('header').addEventListener('click', () => {
+	//					screenfull.exit();
+	//				});
+	//			}
+			}
+		}, true);
 		
-		//make fullscreen if on mobile (header click exists fullscreen)
-		if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
-			const doc = window.document,
-						docEl = doc.documentElement,
-						requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-			
-			if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-    		requestFullScreen.call(docEl);
-  		}
-			
-//			if (screenfull.enabled) {
-//				screenfull.request();
-//				alert(screenfull.isFullscreen);
-//				document.getElementById('header').addEventListener('click', () => {
-//					screenfull.exit();
-//				});
-//			}
-		}
+		drawNextCard();
   }
   
   // set up and initiate rendering of edit interface for new deck
