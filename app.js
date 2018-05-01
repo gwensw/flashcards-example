@@ -266,9 +266,8 @@
       flashcards.shuffle();
       drawNextCard();
     });
-    document.getElementById('checkAnswer').addEventListener('click', () => {
-      submitAnswer();
-    });
+    document.getElementById('checkAnswer').addEventListener('click', submitAnswer);
+		document.getElementById('card').addEventListener('click', submitAnswer);
     document.getElementById('retry').addEventListener('click', () => {
       cardsToRetry = flashcards.getSessionInfo().incorrectCards;
       Render.reset();
@@ -276,9 +275,7 @@
       drawNextCard();
     });
     if (autocheck) {
-      document.getElementById('nextCard').addEventListener('click', () => {
-        drawNextCard();
-      });
+      document.getElementById('nextCard').addEventListener('click', drawNextCard);
     } else {
       document.getElementById('nextButtons').addEventListener('click', (e) => {
         const el = e.target;
@@ -319,6 +316,8 @@
     } else {
       Render.question(card.question[0], card.difficulty);
       document.querySelector('.answer__input').addEventListener('keydown', enterAnswer);
+			document.querySelector('#card').removeEventListener('click', drawNextCard);
+			document.querySelector('#card').addEventListener('click', submitAnswer);
     }
   }
   
@@ -340,6 +339,7 @@
       const result = flashcards.checkAnswer(userAnswer.value.trim()),
            answers = usersettings.firstanswer ? [result.answers[0]] : result.answers;
       Render.answer(answers, result.newDifficulty, result.outcome);
+			document.querySelector('#card').addEventListener('click', drawNextCard);
       recordProgress();
     } else {
       const a = flashcards.revealAnswer(),
@@ -348,6 +348,7 @@
       Render.answer(answers, difficulty);
     }
     userAnswer.removeEventListener('keydown', enterAnswer);
+		document.querySelector('#card').removeEventListener('click', submitAnswer);
   }
       
   function enterAnswer (event) {
