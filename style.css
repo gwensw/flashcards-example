@@ -241,6 +241,7 @@ body {
   border-radius: 10px;
   box-shadow: 1px 1px 10px #DADDDD;
   border: 2px solid #8DA7BE;
+	overflow: hidden;
   background-color: #FDFFFC;
   text-decoration: none;
   color: #50514F;
@@ -703,7 +704,7 @@ body {
   display: none;
 }
 
-@media screen and (max-width: 1125px) {
+@media screen and (max-width: 1200px) {
 	.deckmenu {
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 	}

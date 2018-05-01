@@ -399,7 +399,7 @@
     
     // changes the header according to what area the user's in
     header: function (backlink, title, editing, name) {
-      let shorttitle = truncate(title),
+      let shorttitle = backlink ? truncate(title) : title,
           context = {
             backlink: backlink,
             title: title,
