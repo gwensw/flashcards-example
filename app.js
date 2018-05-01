@@ -500,6 +500,36 @@
       } else {
         document.getElementById('shuffle').focus();
       }
+			
+			const scoreChart = new Chart (document.getElementById("scoreChart"), {
+					type: 'doughnut',
+					data: {
+						datasets: [{
+        			data: [sessionInfo.correct, sessionInfo.incorrect],
+							backgroundColor: ['#70C1B3', '#F25F5C']
+    				}],
+    				labels: [
+							'Correct',
+							'Incorrect'
+						]
+					},
+					options: {
+						legend: {
+							display: false
+						},
+						tooltips: {
+							backgroundColor: 'rgba(0,0,0,0.5)',
+							bodyFontFamily: "'Roboto', sans-serif",
+							bodyFontSize: 16
+						},
+						animation: {
+							duration: 800,
+							animateScale: true
+						},
+						cutoutPercentage: 70
+					}
+			});
+			
     },
     
     //resets the training interface so card and input field are visible

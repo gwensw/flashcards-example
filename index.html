@@ -121,7 +121,8 @@
   
   <script id="scoreTemplate" type="text/x-handlebars-template">
     <p>All done!</p>
-    <p class="card__text">{{correct}} / {{total}}</p>
+		<canvas id="scoreChart" width="300" height="300"></canvas>
+    <p class="score__text">{{correct}} / {{total}}</p>
   </script>
   
   <script id="progressTemplate" type="text/x-handlebars-template">
@@ -206,5 +207,6 @@
   <script type="text/javascript" src="https://rawgit.com/flatiron/director/master/build/director.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 	<script type="text/javascript" src="screenfull.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
   <script type="text/javascript" src="app.js"></script>
 </body>

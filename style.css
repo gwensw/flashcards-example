@@ -405,6 +405,7 @@ body {
 }
 
 .score {
+	position: relative;
 	display: -webkit-box;
   display: -moz-box;
   display: -webkit-flex;
@@ -419,6 +420,15 @@ body {
   margin: 0 auto;
   text-align: center;
   font-family: 'Roboto', sans-serif;
+}
+
+.score__text {
+	position: absolute;
+	top: 170px;
+	align-self: center;
+  margin: auto 0;
+  font-size: 28px;
+  text-align: center;
 }
 
 .answer {
