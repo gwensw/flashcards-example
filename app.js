@@ -42,7 +42,7 @@
 		const fullStar = '<i class="fa fa-star" aria-hidden="true"></i>',
 					halfStar = '<i class="fa fa-star-half-o" aria-hidden="true"></i>',
 					emptyStar = '<i class="fa fa-star-o" aria-hidden="true"></i>',
-					diff = 10 - parseInt(difficulty);
+					diff = parseInt(difficulty);
 		let i = 0,
 				stars = [];
 		for (i; i < 5; i++) {
@@ -257,6 +257,7 @@
       autocheck: autocheck
     });
     Render.header(true, flashcards.getDisplayName(), false, name);
+		drawNextCard();
     
     //bind event listeners to training interface buttons
     document.getElementById('shuffle').addEventListener('click', () => {
@@ -288,8 +289,6 @@
         }
       });
     }
-		
-		drawNextCard();
   }
   
   // set up and initiate rendering of edit interface for new deck

@@ -93,8 +93,8 @@
   </script>
   
   <script id="questionTemplate" type="text/x-handlebars-template">
-    <div class="card__difficulty card__difficulty--{{difficulty}}">
-      <p>Q</p>
+    <div class="card__difficulty">
+      <p>Difficulty:</p>
       <p>
 				{{#difficon difficulty}}
 				{{/difficon}}
@@ -106,7 +106,7 @@
   
   <script id="answerTemplate" type="text/x-handlebars-template">
     <div class="card__difficulty {{#if autocheck}}card__difficulty--{{outcome}}{{/if}}">
-      <p>A</p>
+      <p>Difficulty:</p>
       <p>{{#difficon difficulty}}{{/difficon}}</p>
     </div>
     <p class="card__text">

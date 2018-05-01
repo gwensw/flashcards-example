@@ -376,27 +376,24 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 2em;
+  height: 30px;
 	border-bottom: 1px solid #97AFC3;
   padding: 0 0.75em;
   border-radius: 9px 9px 0 0;
-  font-size: 14px;
+  font-size: 11px;
   text-transform: uppercase;
   font-weight: 300;
   font-style: italic;
   line-height: 0;
 }
 
-.card__difficulty--correct {
-	border-bottom: 1px solid #70C1B3;
-}
-
-.card__difficulty--incorrect {
-	border-bottom: 1px solid #F25F5C;
-}
-
 .card__difficulty i {
 	color: #F6993F;
+	font-size: 14px;
+}
+
+.card__difficulty p:first-of-type {
+	margin: 3px 7px 0 0;
 }
 
 .card__text {
